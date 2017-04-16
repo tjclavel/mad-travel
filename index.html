@@ -1,17 +1,29 @@
 <!doctype html>
-<html ng-app="App" ng-controller="MainController">
-  <head>
-    <title>GK</title>
-    <script src="node_modules/angular/angular.js"></script>
-    <link href="homePage.css" rel="stylesheet"/>
-    <script src="homeController.js"></script>
-  </head>
-  <body>
-
-    <div class="sidebar">
-      <p class="tab">Postings</p>
-      <p class="tab">Help</p>
-    </div>
-
-  </body>
+<html>
+    <head>
+        <title>GK Job Postings</title>
+    </head>
+    <body>]
+        <p>
+            If you can see this message it means your simple Node.js web server is working!
+        </p>
+        <p>
+            Please click the link below to redirect to the job postings site
+        <ul>
+            <li>Job Postings - <a href="home-page.html">home-page.html</a></li>
+        </ul>
+        <script type="text/javascript">
+            //<![CDATA[
+            // Angular doesn't work using the file protocol and it dies with an obscure error
+            // message.  Since the project's files are accessible using either the file or
+            // http protocols we warn the user if they are not using http.
+            if(window.location.protocol !== 'http:') {
+                var msg = "Project #6 files must be accessed with the http protocol (not from local files)."  +
+                                "\nUse the URL http://localhost:3000";
+                console.error(msg);
+                alert(msg);
+            }
+            //]]>
+        </script>
+    </body>
 </html>
