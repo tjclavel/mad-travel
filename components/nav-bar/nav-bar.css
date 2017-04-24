@@ -1,1 +1,6 @@
-
+.full-line {
+  display: block;
+  margin: 6px;
+  text-decoration: none;
+  color: blue;
+}

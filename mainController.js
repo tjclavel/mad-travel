@@ -13,6 +13,10 @@ cs142App.config(['$routeProvider',
                 templateUrl: 'components/nav-bar/nav-barTemplate.html',
                 controller: 'NavBarController'
             }).
+            when('/add/post', {
+                templateUrl: 'components/job-postings/add-job.html',
+                controller: 'JobPostingsController'
+            }).
             otherwise({
                 redirectTo: '/posts'
             });

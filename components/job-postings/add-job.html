@@ -1,0 +1,10 @@
+<h2>Add Job</h2>
+<form name="addJobForm">
+	<md-input-container>
+		<label>Job Title</label>
+		<input name="jobTitle" type="text" ng-model="newJob.title" required>
+		<div ng-messages="addJobForm.jobTitle.$error">
+			<div ng-message="required">This field is required.</div>
+		</div>
+	</md-input-container>
+</form>
