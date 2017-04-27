@@ -1,10 +1,21 @@
 <h2>Add Job</h2>
-<form name="addJobForm">
-	<md-input-container>
-		<label>Job Title</label>
-		<input name="jobTitle" type="text" ng-model="newJob.title" required>
-		<div ng-messages="addJobForm.jobTitle.$error">
-			<div ng-message="required">This field is required.</div>
-		</div>
-	</md-input-container>
+<form name="addJob" ng-submit="adding()">
+  <md-input-container>
+    <label>Job Title</label>
+    <input name="title" ng-model="job.title" required md-maxlength="20" minlength="4">
+    <div ng-messages="addJob.title.$error">
+      <div ng-message="required">This is required!</div>
+      <div ng-message="md-maxlength">That's too long!</div>
+      <div ng-message="minlength">That's too short!</div>
+    </div>
+  </md-input-container>
+  <md-input-container>
+    <label>Job Description</label>
+    <textarea name="description" ng-model="job.description" required md-maxlength="300"></textarea>
+    <div ng-messages="addJob.description.$error">
+      <div ng-message="required">This is required!</div>
+      <div ng-message="md-maxlength">That's too long!</div>
+    </div>
+  </md-input-container>
+  <input type="submit" value="Submit">
 </form>

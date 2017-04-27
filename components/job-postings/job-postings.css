@@ -1,1 +1,7 @@
+.job {
+  border: 1px solid grey;
+}
 
+.job:hover {
+  background-color: lightgrey;
+}

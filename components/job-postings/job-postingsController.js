@@ -6,4 +6,9 @@ cs142App.controller('JobPostingsController', ['$scope',
   		window.location.href = "#/add/post";
   	};
 
+  	// $scope.adding = function() {
+  	// 	console.log("hello");
+  	// 	console.log($scope.job);
+  	// };
+
   }]);
