@@ -1,0 +1,7 @@
+.project {
+  border: 1px solid grey;
+}
+
+.project:hover {
+  background-color: lightgrey;
+}
