@@ -25,4 +25,6 @@ cs142App.config(['$routeProvider',
 cs142App.controller('MainController', ['$scope', '$resource',
     function ($scope, $resource) {
         $scope.main = {};
+
+        $scope.job = {};
     }]);
