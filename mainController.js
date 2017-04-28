@@ -6,16 +6,16 @@ cs142App.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
             when('/posts', {
-                templateUrl: 'components/job-postings/job-postingsTemplate.html',
-                controller: 'JobPostingsController'
+                templateUrl: 'components/project-postings/project-postingsTemplate.html',
+                controller: 'ProjectPostingsController'
             }).
             when('/nav', {
                 templateUrl: 'components/nav-bar/nav-barTemplate.html',
                 controller: 'NavBarController'
             }).
-            when('/add/post', {
-                templateUrl: 'components/job-postings/add-job.html',
-                controller: 'JobPostingsController'
+            when('/add/project', {
+                templateUrl: 'components/project-postings/add-project.html',
+                controller: 'ProjectPostingsController'
             }).
             otherwise({
                 redirectTo: '/posts'
@@ -26,5 +26,5 @@ cs142App.controller('MainController', ['$scope', '$resource',
     function ($scope, $resource) {
         $scope.main = {};
 
-        $scope.job = {};
+        $scope.project = {};
     }]);
