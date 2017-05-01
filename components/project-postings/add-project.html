@@ -1,19 +1,25 @@
 <h2>Add Job</h2>
-<form name="addProject" ng-submit="adding()">
+<form name="addProject" ng-submit="addingProject()">
   <md-input-container>
     <label>Project Title</label>
-    <input name="title" ng-model="project.title" required md-maxlength="20" minlength="4">
+    <input name="title" ng-model="pendingProject.title" required md-maxlength="20" minlength="4">
     <div ng-messages="addProject.title.$error">
       <div ng-message="required">This is required!</div>
     </div>
   </md-input-container>
+  <br/>
   <md-input-container>
     <label>Project Description</label>
-    <textarea name="description" ng-model="project.description" required md-maxlength="300"></textarea>
+    <textarea name="description" ng-model="pendingProject.description" required md-maxlength="300"></textarea>
     <div ng-messages="addProject.description.$error">
       <div ng-message="required">This is required!</div>
-      <div ng-message="md-maxlength">That's too long!</div>
     </div>
   </md-input-container>
+  <br/>
+  <md-input-container>
+    <label>Skills Wanted (separate by comma)</label>
+    <input class="inp-field" name="skills" ng-model="pendingProject.skills">
+  </md-input-container>
+  <br/>
   <input type="submit" value="Submit">
 </form>
