@@ -6,8 +6,10 @@ cs142App.controller('ProjectPostingsController', ['$scope',
     };
 
     $scope.pendingProject = {};
+    $scope.showTitle = false;
 
     $scope.addingProject = function() {
+      $scope.pendingProject.image = "/images/doge.jpeg";
       $scope.projects.push($scope.pendingProject);
       window.location.href = "#/posts";
     };

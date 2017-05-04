@@ -1,13 +1,9 @@
-.main-name {
-  padding: 10px;
+#toolbar {
+  height: 4em;
+  background-color: #1ebac3;
 }
 
-.main-nav {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
-
-.main-features {
-  padding: 10px;
+#toolbar img {
+  height: 4em;
+  margin-left: 5em;
 }

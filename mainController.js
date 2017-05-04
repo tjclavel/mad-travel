@@ -26,5 +26,6 @@ cs142App.controller('MainController', ['$scope', '$resource',
     function ($scope, $resource) {
         $scope.main = {};
 
-        $scope.project = {};
+        $scope.projects = [{title: "doggo", image: "/images/doge.jpeg"},
+                            {title: "doge2", image: "/images/doge.jpeg"}];
     }]);

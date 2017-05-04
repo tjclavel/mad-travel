@@ -28,15 +28,16 @@
 
     <body layout="column">
 
-        <md-toolbar layout = "row">
-          <div class="main-name">XXXXXXXXXXXXXXX</div>
+        <md-toolbar id="toolbar" layout = "row">
+          <!--<div class="main-name">Mad Travel</div>-->
+          <img ng-src="/images/mad-travel.png"/>
         </md-toolbar>
 
         <div class="container" flex layout="row">
 
-            <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+<!--            <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
                 <div ng-include="'components/nav-bar/nav-barTemplate.html'" ng-controller="NavBarController"></div>
-            </md-sidenav>
+            </md-sidenav>-->
 
             <md-content flex id="content">
                 <div ng-view></div>
