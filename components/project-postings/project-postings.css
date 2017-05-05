@@ -26,7 +26,7 @@
   margin: 8px;
 }
 
-#get-involved {
+.title {
   font-family: 'SignPainter';
   text-align: center;
   font-size: 60px;
@@ -71,12 +71,4 @@
 
 #add-project {
   text-align: center;
-}
-
-#add-project h2 {
-  font-family: 'SignPainter';
-  text-align: center;
-  font-size: 60px;
-  margin-bottom: 0;
-  font-weight: 400;
 }

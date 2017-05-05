@@ -17,6 +17,10 @@ cs142App.config(['$routeProvider',
                 templateUrl: 'components/project-postings/add-project.html',
                 controller: 'ProjectPostingsController'
             }).
+            when('/project/:id', {
+                templateUrl: 'components/project-view/projectTemplate.html',
+                controller: 'ProjectViewController'
+            }).
             otherwise({
                 redirectTo: '/posts'
             });
@@ -26,6 +30,7 @@ cs142App.controller('MainController', ['$scope', '$resource',
     function ($scope, $resource) {
         $scope.main = {};
 
-        $scope.projects = [{title: "doggo", image: "/images/doge.jpeg"},
-                            {title: "doge2", image: "/images/doge.jpeg"}];
+        $scope.curId = 3;
+        $scope.projects = [{title: "doggo", image: "/images/doge.jpeg", id: 1},
+                            {title: "doge2", image: "/images/doge.jpeg", id: 2}];
     }]);

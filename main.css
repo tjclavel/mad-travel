@@ -3,7 +3,10 @@
   background-color: #1ebac3;
 }
 
+#toolbar a {
+  margin-left: 5em;
+}
+
 #toolbar img {
   height: 4em;
-  margin-left: 5em;
 }

@@ -1,4 +1,4 @@
-<h1 id="get-involved">Get Involved</h1>
+<h1 class="title">Get Involved</h1>
 
 <p class="slogan">Help us make the world a better place. Use this site to navigate our projects and volunteer opportunities.</p>
 
@@ -7,13 +7,15 @@
 </div>
 
 <div class="projects">
-  <div class="project" 
-       ng-mouseover="showTitle = true;"
-       ng-mouseleave="showTitle = false;"
-       style="background-image: url({{project.image}});
-              background-size: 18em;" 
-      ng-repeat="project in projects">
-    <p class="project-title" ng-if="showTitle">{{project.title}}</p>
-    <div class=project-background ng-if=showTitle></div>
+  <a href="#/project/{{project.id}}">
+    <div class="project" 
+        ng-mouseover="showTitle = true;"
+        ng-mouseleave="showTitle = false;"
+        style="background-image: url({{project.image}});
+                background-size: 18em;" 
+        ng-repeat="project in projects">
+      <p class="project-title" ng-if="showTitle">{{project.title}}</p>
+      <div class=project-background ng-if=showTitle></div>
+    </a>
   </div>
 </div>
