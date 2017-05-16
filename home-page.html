@@ -26,21 +26,20 @@
         <link rel="stylesheet" type="text/css" href="components/project-postings/project-postings.css">
 
         <script src="components/project-view/project-viewController.js"></script>
+        <link rel="stylesheet" type="text/css" href="components/project-view/project-view.css">
+        <script src="components/login/loginController.js"></script>
+        <link rel="stylesheet" type="text/css" href="components/login/login.css">
 
     </head>
 
     <body layout="column">
 
         <md-toolbar id="toolbar" layout = "row">
-          <!--<div class="main-name">Mad Travel</div>-->
           <a href="#/posts"><img ng-src="/images/mad-travel.png"/></a>
+          <a href="#/login">Login as Administrator</a>
         </md-toolbar>
 
         <div class="container" flex layout="row">
-
-<!--            <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
-                <div ng-include="'components/nav-bar/nav-barTemplate.html'" ng-controller="NavBarController"></div>
-            </md-sidenav>-->
 
             <md-content flex id="content">
                 <div ng-view></div>

@@ -5,14 +5,6 @@
         <link rel="shortcut icon" href="/images/favicon.ico" />
     </head>
     <body>
-        <p>
-            If you can see this message it means your simple Node.js web server is working!
-        </p>
-        <p>
-            Please click the link below to redirect to the job postings site
-        <ul>
-            <li>Job Postings - <a href="home-page.html">home-page.html</a></li>
-        </ul>
         <script type="text/javascript">
             //<![CDATA[
             // Angular doesn't work using the file protocol and it dies with an obscure error
@@ -24,6 +16,7 @@
                 console.error(msg);
                 alert(msg);
             }
+            window.location = "home-page.html";
             //]]>
         </script>
     </body>

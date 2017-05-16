@@ -2,20 +2,15 @@
 
 <p class="slogan">Help us make the world a better place. Use this site to navigate our projects and volunteer opportunities.</p>
 
-<div class="button-wrap">
+<div class="button-wrap" ng-if="asAdministrator">
   <md-button ng-click="addProject()">Add Project</md-button>
 </div>
 
 <div class="projects">
-  <a href="#/project/{{project.id}}">
-    <div class="project" 
-        ng-mouseover="showTitle = true;"
-        ng-mouseleave="showTitle = false;"
-        style="background-image: url({{project.image}});
-                background-size: 18em;" 
-        ng-repeat="project in projects">
-      <p class="project-title" ng-if="showTitle">{{project.title}}</p>
-      <div class=project-background ng-if=showTitle></div>
-    </a>
-  </div>
+    <div class="project" ng-repeat="project in projects">
+        <div class="project-image"
+              style="background-image: url({{project.image}});">
+        </div>
+      <p class="project-title">{{project.title}}</p>
+    </div>
 </div>

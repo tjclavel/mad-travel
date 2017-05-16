@@ -1,14 +1,28 @@
 .project {
-  border: 6px solid #eee;
+  height: 17em;
   width: 18em;
-  height: 12em;
   margin: 10px;
   display: inline-block;
   text-align: center;
   position: relative;
+  border: 4px solid #eee;
 }
 
-.project-background {
+.project-image {
+  height: 14em;
+  background-size: 18em;
+  border-bottom: 2px solid #eee;
+}
+
+.dropdown {
+  border: 2px solid green;
+  position: relative;
+  height: 20em;
+  width: 70%;
+  position: relative;
+}
+
+/*.project-background {
   position: absolute;
   width: 18em;
   height: 12em;
@@ -24,7 +38,7 @@
 
 .projects {
   margin: 8px;
-}
+}*/
 
 .title {
   font-family: 'SignPainter';
@@ -53,7 +67,7 @@
   width: 100%;
   text-align: center;
 }
-
+/*
 .project-title {
   font-weight: 400;
   font-size: 1.5em;
@@ -71,4 +85,4 @@
 
 #add-project {
   text-align: center;
-}
+}*/

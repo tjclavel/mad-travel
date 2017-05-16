@@ -21,4 +21,13 @@ cs142App.controller('ProjectPostingsController', ['$scope',
       window.location.href = "#/posts";
     };
 
+    $scope.showing = -1;
+    $scope.offset = 0;
+
+    $scope.hover = function(e) {
+      $scope.showing = 1;
+      console.log(e);
+      $scope.offset = e.screenY
+    };
+
   }]);

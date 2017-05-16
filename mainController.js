@@ -13,6 +13,10 @@ cs142App.config(['$routeProvider',
                 templateUrl: 'components/nav-bar/nav-barTemplate.html',
                 controller: 'NavBarController'
             }).
+            when('/login', {
+                templateUrl: 'components/login/loginTemplate.html',
+                controller: 'LoginController'
+            }).
             when('/add/project', {
                 templateUrl: 'components/project-postings/add-project.html',
                 controller: 'ProjectPostingsController'
@@ -34,4 +38,6 @@ cs142App.controller('MainController', ['$scope', '$resource',
         $scope.projects = [{title: "doggo", image: "/images/doge.jpeg", id: 1},
                            {title: "doggo treat", image: "/images/dog-treat.jpg", id: 2},
                             {title: "gross furball thing", image: "/images/cat.jpg", id: 3}];
+
+        $scope.asAdministrator = false;
     }]);
