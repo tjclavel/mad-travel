@@ -227,7 +227,7 @@ app.post('/sendmail', function(req, res){
 
     var options = {
         auth: {
-            api_key: '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'
+            api_key: 'idk how to store locally, maybe we should put it in an environment variable?'
         }
     }
     var mailer = nodemailer.createTransport(sgTransport(options));
