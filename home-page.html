@@ -35,8 +35,13 @@
     <body layout="column">
 
         <md-toolbar id="toolbar" layout = "row">
-          <a href="#/posts"><img ng-src="/images/mad-travel.png"/></a>
-          <a href="#/login">Login as Administrator</a>
+          <a id="toolbar-image" href="#/posts"><img ng-src="/images/mad-travel.png"/></a>
+          <!--<md-button id="toolbar-login" ng-click="login()" ng-if="!main.asAdministrator">
+              Login as Administrator
+          </md-button>
+          <md-button id="toolbar-logout" ng-click="main.asAdministrator = false;" ng-if="main.asAdministrator">
+            Logout
+          </md-button>-->
         </md-toolbar>
 
         <div class="container" flex layout="row">
@@ -47,5 +52,13 @@
 
         </div>
 
+        <div class="centered">
+          <md-button ng-click="login()" ng-if="!main.asAdministrator">
+            Login as Administrator
+          </md-button>
+          <md-button ng-click="main.asAdministrator = false;" ng-if="main.asAdministrator">
+            Logout
+          </md-button>
+        </div>
     </body>
 </html>

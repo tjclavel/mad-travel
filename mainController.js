@@ -32,12 +32,14 @@ cs142App.config(['$routeProvider',
 
 cs142App.controller('MainController', ['$scope', '$resource',
     function ($scope, $resource) {
-        $scope.main = {};
+        $scope.main = {asAdministrator: false};
 
-        $scope.curId = 4;
-        $scope.projects = [{title: "doggo", image: "/images/doge.jpeg", id: 1},
-                           {title: "doggo treat", image: "/images/dog-treat.jpg", id: 2},
-                            {title: "gross furball thing", image: "/images/cat.jpg", id: 3}];
+        $scope.main.projects = [];
 
-        $scope.asAdministrator = false;
+        console.log("from Main");
+        console.log($scope.projects);
+
+        $scope.login = function() {
+          window.location = "#/login";
+        };
     }]);

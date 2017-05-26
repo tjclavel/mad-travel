@@ -1,0 +1,10 @@
+#login-form {
+  margin: 10px;
+}
+
+#password {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  margin-bottom: 6px;
+}

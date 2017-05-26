@@ -1,10 +1,12 @@
 #toolbar {
   height: 4em;
   background-color: #1ebac3;
+  position: relative;
 }
 
-#toolbar a {
-  margin-left: 3em;
+#toolbar-image {
+  position: absolute;
+  left: 3em;
 }
 
 #toolbar img {

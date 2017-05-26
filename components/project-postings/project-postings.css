@@ -8,6 +8,11 @@
   border: 4px solid #eee;
 }
 
+.project:hover {
+  border: 4px solid gainsboro;
+  cursor: pointer;
+}
+
 .project-image {
   height: 14em;
   background-size: 18em;
@@ -63,7 +68,7 @@
   margin: 0;
 }
 
-.button-wrap {
+.centered {
   width: 100%;
   text-align: center;
 }

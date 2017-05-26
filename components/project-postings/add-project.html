@@ -1,9 +1,9 @@
 <div id="add-project">
 <h2 class="title">Add Project</h2>
-<form name="addProject" ng-submit="addingProject()">
+<form id="add-project-form" class="centered" name="addProject" ng-submit="addingProject()">
   <md-input-container>
     <label>Project Title</label>
-    <input name="title" ng-model="pendingProject.title" required md-maxlength="20" minlength="4">
+    <input name="title" ng-model="pendingProject.title" required md-maxlength="20">
     <div ng-messages="addProject.title.$error">
       <div ng-message="required">This is required!</div>
     </div>
@@ -18,8 +18,18 @@
   </md-input-container>
   <br/>
   <md-input-container>
+    <label>Email</label>
+    <input class="inp-field" name="email" ng-model="pendingProject.email">
+  </md-input-container>
+  <br/>
+  <md-input-container>
     <label>Skills Wanted (separate by comma)</label>
     <input class="inp-field" name="skills" ng-model="pendingProject.skills">
+  </md-input-container>
+  <br/>
+  <md-input-container>
+    <label>Number of Volunteers</label>
+    <input class="inp-field" name="numVolunteers" ng-model="pendingProject.numVolunteers">
   </md-input-container>
   <br/>
   <input type="submit" value="Submit">

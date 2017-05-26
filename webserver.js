@@ -39,6 +39,7 @@ var async = require('async');
 var User = require('./schema/user.js');
 var Photo = require('./schema/photo.js');
 var SchemaInfo = require('./schema/schemaInfo.js');
+var Project = require('./schema/project.js');
 
 var express = require('express');
 var app = express();
@@ -52,7 +53,12 @@ mongoose.connect('mongodb://localhost/cs142project6');
 // the work for us.
 app.use(express.static(__dirname));
 
+//For sending emails
+var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
+var sgTransport = require('nodemailer-sendgrid-transport');
 
+app.use(bodyParser.json());
 app.get('/', function (request, response) {
     response.send('Simple web server of files from ' + __dirname);
 });
@@ -215,6 +221,45 @@ app.get('/photosOfUser/:id', function (request, response) {
       });
     });
 
+});
+
+app.post('/sendmail', function(req, res){
+
+    var options = {
+        auth: {
+            api_key: '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'
+        }
+    }
+    var mailer = nodemailer.createTransport(sgTransport(options));
+    mailer.sendMail(req.body, function(error, info){
+        if(error){
+            console.log(error);
+            res.status('401').json({err: info});
+        }else{
+            console.log("Email sent");
+            res.status('200').json({success: true});
+        }
+    });
+});
+
+app.post('/add/project', function(req, res) {
+  Project.create({
+                  title: req.body.title,
+                  skills: req.body.skills,
+                  email: req.body.email,
+                  image: req.body.image,
+                  description: req.body.description,
+                  numVolunteers: req.body.numVolunteers
+                 });
+  res.status(200).send("added project");
+});
+
+app.get('/load/projects', function(req, res) {
+  console.log("hello");
+  Project.find({}, function(err, projects) {
+    console.log(projects);
+    res.status(200).send(JSON.stringify(projects));
+  });
 });
 
 

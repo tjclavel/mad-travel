@@ -2,12 +2,12 @@
 
 <p class="slogan">Help us make the world a better place. Use this site to navigate our projects and volunteer opportunities.</p>
 
-<div class="button-wrap" ng-if="asAdministrator">
+<div class="centered" ng-if="main.asAdministrator === true">
   <md-button ng-click="addProject()">Add Project</md-button>
 </div>
 
 <div class="projects">
-    <div class="project" ng-repeat="project in projects">
+    <div class="project" ng-repeat="project in main.projects" ng-click="goto_project($index)">
         <div class="project-image"
               style="background-image: url({{project.image}});">
         </div>

@@ -20,7 +20,7 @@
  */
 
 // Get the magic models we used in the previous projects.
-var cs142models = require('./modelData/photoApp.js').cs142models;
+var cs142models = require('./modelData/PhotoApp.js').cs142models;
 
 // We use the Mongoose to define the schema stored in MongoDB.
 var mongoose = require('mongoose');
@@ -31,11 +31,12 @@ mongoose.connect('mongodb://localhost/cs142project6');
 var User = require('./schema/user.js');
 var Photo = require('./schema/photo.js');
 var SchemaInfo = require('./schema/schemaInfo.js');
+var Project = require('./schema/project.js');
 
 var versionString = '1.0';
 
 // We start by removing anything that existing in the collections.
-var removePromises = [User.remove({}), Photo.remove({}), SchemaInfo.remove({})];
+var removePromises = [User.remove({}), Photo.remove({}), SchemaInfo.remove({}), Project.remove({})];
 
 Promise.all(removePromises).then(function () {
 
