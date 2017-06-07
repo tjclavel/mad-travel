@@ -1,6 +1,8 @@
 <div id="add-project">
 <h2 class="title">Add Project</h2>
 <form id="add-project-form" class="centered" name="addProject" ng-submit="addingProject()">
+
+<!-- TITLE -->
   <md-input-container>
     <label>Project Title</label>
     <input name="title" ng-model="pendingProject.title" required md-maxlength="20">
@@ -9,6 +11,9 @@
     </div>
   </md-input-container>
   <br/>
+
+
+<!-- DESCRIPTION -->
   <md-input-container>
     <label>Project Description</label>
     <textarea name="description" ng-model="pendingProject.description" required md-maxlength="300"></textarea>
@@ -17,21 +22,99 @@
     </div>
   </md-input-container>
   <br/>
+
+
+<!-- EMAIL -->
   <md-input-container>
     <label>Email</label>
-    <input class="inp-field" name="email" ng-model="pendingProject.email">
+    <input class="inp-field" name="email" ng-model="pendingProject.email" required="testing">
+    <div ng-messages="addProject.email.$error">
+      <div ng-message="required">This is required!</div>
+    </div>
   </md-input-container>
   <br/>
+
+
+<!-- SKILLS -->
   <md-input-container>
     <label>Skills Wanted (separate by comma)</label>
-    <input class="inp-field" name="skills" ng-model="pendingProject.skills">
+    <input class="inp-field" name="skills" ng-model="pendingProject.skills" required="testing">
+    <div ng-messages="addProject.skills.$error">
+      <div ng-message="required">This is required!</div>
+    </div>
   </md-input-container>
   <br/>
+
+
+<!-- NUM VOLUNTEERS -->
   <md-input-container>
     <label>Number of Volunteers</label>
-    <input class="inp-field" name="numVolunteers" ng-model="pendingProject.numVolunteers">
+    <input class="inp-field" type = "number" name="numVolunteers" ng-model="pendingProject.numVolunteers"
+    required="testing">
+    <div ng-messages="addProject.numVolunteers.$error">
+      <div ng-message="required">Numerical number is required!</div>
+    </div>
   </md-input-container>
   <br/>
+
+
+<!-- DATE -->
+  <md-input-container>
+    <label>Project Date</label>
+    <input class="inp-field" type = "date" name="date" ng-model="pendingProject.date"
+    required="testing">
+    <div ng-messages="addProject.date.$error">
+      <div ng-message="required">Numerical number is required!</div>
+    </div>
+  </md-input-container>
+  <br/>
+
+
+<!-- START TIME -->
+  <md-input-container>
+    <label>Starting Time</label>
+    <input class="inp-field" type = "time" name="startTime" ng-model="pendingProject.startTime" required="testing">
+    <div ng-messages="addProject.startTime.$error">
+      <div ng-message="required">Numerical number is required!</div>
+    </div>
+  </md-input-container>
+  <br/>
+
+
+<!-- END TIME -->
+  <md-input-container>
+    <label>End Time</label>
+    <input class="inp-field" type="time" name="endTime" ng-model="pendingProject
+.endTime" required="testing">
+    <div ng-messages="addProject.endTime.$error">
+      <div ng-message="required">Numerical number is required!</div>
+    </div>
+  </md-input-container>
+  <br/>
+
+
+<!-- COMMITMENT -->
+  <md-input-container>
+    <label>Desired Commitment (hours)</label>
+    <input class="inp-field" type = "number" name="commitment" ng-model="pendingProject.commitment"
+    required="testing">
+    <div ng-messages="addProject.commitment.$error">
+      <div ng-message="required">Numerical number is required!</div>
+    </div>
+  </md-input-container>
+  <br/>
+
+
+<!-- LOCATION  -->
+  <md-input-container>
+    <label>Location</label>
+    <input class="inp-field" type = "text" name="location" ng-model="pendingProject.location">
+    <div ng-messages="addProject.location.$error">
+      <div ng-message="required">Numerical number is required!</div>
+    </div>
+  </md-input-container>
+  <br/>
+
   <input type="submit" value="Submit">
-</form>
+  </form>
 </div>

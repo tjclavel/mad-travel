@@ -1,5 +1,5 @@
-<div>
-  <h2 class="title">{{project.title}}</h2>
+<div class="centered" id="project-view-container">
+<!--  <h2 class="title">{{project.title}}</h2>
   <h3 class="project-description slogan">{{project.description}}</h3>
   <h3 class="project-description slogan">Number of Volunteers needed: {{project.numVolunteers}}</h3>
   <form ng-submit="sendInterest()" class="centered">
@@ -14,5 +14,37 @@
     </md-input-container>
     <br/>
     <input type="submit"></input>
-  </form>
+  </form>-->
+
+  <h2 class="title">{{project.title}}</h2>
+  <p class="project-description">{{project.description}}</p>
+  <div class="centered">
+    <div id="project-field-names">
+      <p class="project-field">Date:</p>
+      <p class="project-field">Time:</p>
+      <p class="project-field">Commitment:</p>
+      <p class="project-field">Location:</p>
+      <p class="project-field">Required Skills:</p>
+    </div>
+    <div id="project-field-values">
+      <p class="project-field-">{{project.date}}</p>
+      <p class="project-field-">{{project.startTime}} - {{project.endTime}}</p>
+      <p class="project-field-">{{project.commitment}} hours</p>
+      <p class="project-field-">{{project.location}}</p>
+      <p class="project-field-">{{project.skills}}</p>
+    </div>
+    <form ng-submit="sendInterest()" class="centered">
+      <md-input-container>
+        <label>Email</label>
+        <input type="text" ng-model="interest.email" required>
+      </md-input-container>
+      <br/>
+      <md-input-container>
+        <label>Name</label>
+        <input type="text" ng-model="interest.name" required>
+      </md-input-container>
+      <br/>
+      <input type="submit"></input>
+    </form>
+  </div>
 </div>

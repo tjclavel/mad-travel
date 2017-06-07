@@ -18,11 +18,16 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource',
       $scope.pendingProject.image = "/images/doge.jpeg";
       $resource('/add/project').save({
         title: $scope.pendingProject.title,
-        skills: $scope.pendingProject.skills.split(','),
+        skills: $scope.pendingProject.skills,
         image: $scope.pendingProject.image,
         description: $scope.pendingProject.description,
         email: $scope.pendingProject.email,
-        numVolunteers: $scope.pendingProject.numVolunteers
+        numVolunteers: $scope.pendingProject.numVolunteers,
+        startTime: $scope.pendingProject.startTime,
+        endTime: $scope.pendingProject.endTime,
+        date: $scope.pendingProject.date,
+        _location: $scope.pendingProject.location,
+        commitment: $scope.pendingProject.commitment
       }, function() {
         window.location = "#/posts";
       });
@@ -56,8 +61,8 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource',
       window.location.href = "#/posts";
     };
 */
-    $scope.goto_project = function(i) {
-      window.location = "#/project/" + i;
+    $scope.goto_project = function(id) {
+      window.location = "#/project/" + id;
     };
 
   }]);

@@ -1,11 +1,20 @@
 cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resource',
   function($scope, $routeParams, $resource) {
 
-    console.log("from PV");
+
+    var projectId = $routeParams.id;
+
+    var Project = $resource('/project/:projectId', {projectId:'@projectId'});
+    Project.get({projectId: projectId}, function(project) {
+      $scope.project = project;
+    });
+
+
+    /*console.log("from PV");
     console.log($scope.main.projects);
 
     $scope.project = $scope.main.projects[$routeParams.id];
-    console.log($scope.main.projects);
+    console.log($scope.main.projects);*/
     /*$scope.project = {};
     console.log($scope.projects);
     for(var i = 0; i < $scope.projects.length; i++) {

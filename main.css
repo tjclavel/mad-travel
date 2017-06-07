@@ -12,3 +12,12 @@
 #toolbar img {
   height: 4em;
 }
+
+.main-login {
+  text-align: center;
+  background-color: #1ebac3;
+}
+
+.main-login md-button {
+  display: inline-block;
+}

@@ -1,16 +1,34 @@
-<h1 class="title">Get Involved</h1>
+<h1 class="pp-title">GET INVOLVED</h1>
 
-<p class="slogan">Help us make the world a better place. Use this site to navigate our projects and volunteer opportunities.</p>
+<p class="pp-slogan">Help us make the world a better place. Use this site to navigate the wide array of projects and volunteer opportunities we have here at GK.</p>
+
+<div class="pp-heroes">HEROES
+</div>
 
 <div class="centered" ng-if="main.asAdministrator === true">
   <md-button ng-click="addProject()">Add Project</md-button>
 </div>
 
-<div class="projects">
-    <div class="project" ng-repeat="project in main.projects" ng-click="goto_project($index)">
-        <div class="project-image"
-              style="background-image: url({{project.image}});">
-        </div>
-      <p class="project-title">{{project.title}}</p>
+<div class="pp-sorter">
+  <div class="pp-mySelectWrapper">
+    <select class="pp-mySelect">
+      <option value="relevance">Relevance</option>
+      <option value="atoz">A to Z</option>
+      <option value="ztoa"> Z to A</option>
+    </select>
+  </div>
+  <span class="pp-sorter-label">
+    SORT BY:
+  </span>
+</div>
+
+
+
+<div class="pp-projects">
+    <div class="pp-project" ng-repeat="project in main.projects" ng-click="goto_project(project._id)">
+      <img class="pp-project-image" ng-src="{{project.image}}">
+      <div class="pp-orange"></div>
+      <div class="pp-project-title"><h4>{{project.title}}</h4></div>
+      <div class="pp-project-title"><p>Palo Alto, CA</p></div>
     </div>
 </div>

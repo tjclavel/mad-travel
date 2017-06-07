@@ -1,7 +1,34 @@
+#project-view-container {
+  margin: auto;
+  width: 75%;
+  position: relative;
+}
+
 .project-description {
-  margin: 15px;
+  margin: 3em;
 }
 
 .thumbnail {
   height: 15px;
+}
+
+#project-field-names {
+  width: 20%;
+  display: inline-block;
+  text-align: left;
+}
+
+#project-field-values {
+  width: 50%;
+  display: inline-block;
+  text-align: left;
+}
+
+.project-field {
+  font-weight: 800;
+  margin: 4px;
+}
+
+.project-field- {
+  margin: 5px;
 }
