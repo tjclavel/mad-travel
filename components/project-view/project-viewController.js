@@ -25,7 +25,7 @@ cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resourc
 
     $scope.interest = {};
     $scope.sendInterest = function() {
-      var mail = {from: $scope.interest.email, to: $scope.project.email, subject: "Interest in your community project!", text: $scope.interest.name + " is interested in your project!"};
+      var mail = {from: $scope.interest.email, to: $scope.project.email, subject: "Interest in your community project!", text: $scope.interest.name + " is interested in your project! Get in contact with them by emailing " + $scope.interest.email};
       $scope.senda(mail);
       window.location.href = "#/posts";
     };

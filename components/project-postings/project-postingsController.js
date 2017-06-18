@@ -1,11 +1,11 @@
-cs142App.controller('ProjectPostingsController', ['$scope', '$resource',
-  function($scope, $resource) {
+cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$location',
+  function($scope, $resource, $location) {
 
     console.log("from PP");
     console.log($scope.projects);
 
     $scope.addProject = function() {
-      window.location.href = "#/add/project";
+      $location.path("/add/project");
     };
 
     var resource = $resource('/load/projects')
@@ -13,25 +13,25 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource',
       console.log($scope.main.projects);
     });
 
-    $scope.pendingProject = {};
-    $scope.addingProject = function() {
-      $scope.pendingProject.image = "/images/doge.jpeg";
-      $resource('/add/project').save({
-        title: $scope.pendingProject.title,
-        skills: $scope.pendingProject.skills,
-        image: $scope.pendingProject.image,
-        description: $scope.pendingProject.description,
-        email: $scope.pendingProject.email,
-        numVolunteers: $scope.pendingProject.numVolunteers,
-        startTime: $scope.pendingProject.startTime,
-        endTime: $scope.pendingProject.endTime,
-        date: $scope.pendingProject.date,
-        _location: $scope.pendingProject.location,
-        commitment: $scope.pendingProject.commitment
-      }, function() {
-        window.location = "#/posts";
-      });
-    }
+    // $scope.pendingProject = {};
+    // $scope.addingProject = function() {
+    //   $scope.pendingProject.image = "/images/doge.jpeg";
+    //   $resource('/add/project').save({
+    //     title: $scope.pendingProject.title,
+    //     skills: $scope.pendingProject.skills,
+    //     image: $scope.pendingProject.image,
+    //     description: $scope.pendingProject.description,
+    //     email: $scope.pendingProject.email,
+    //     numVolunteers: $scope.pendingProject.numVolunteers,
+    //     startTime: $scope.pendingProject.startTime,
+    //     endTime: $scope.pendingProject.endTime,
+    //     date: $scope.pendingProject.date,
+    //     _location: $scope.pendingProject.location,
+    //     commitment: $scope.pendingProject.commitment
+    //   }, function() {
+    //     window.location = "#/posts";
+    //   });
+    // }
 
 /*    var projectsResource = $resource('/load/projects');
     var response = projectsResource.query({}, function() {
