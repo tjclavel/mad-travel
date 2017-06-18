@@ -18,8 +18,8 @@ cs142App.config(['$routeProvider',
                 controller: 'LoginController'
             }).
             when('/add/project', {
-                templateUrl: 'components/project-postings/add-project.html',
-                controller: 'ProjectPostingsController'
+                templateUrl: 'components/project-add/project-addTemplate.html',
+                controller: 'ProjectAddController'
             }).
             when('/project/:id', {
                 templateUrl: 'components/project-view/projectTemplate.html',

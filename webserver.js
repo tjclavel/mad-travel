@@ -41,7 +41,9 @@ var User = require('./schema/user.js');
 var Photo = require('./schema/photo.js');
 var SchemaInfo = require('./schema/schemaInfo.js');
 var Project = require('./schema/project.js');
-
+var fs = require("fs");
+var multer = require('multer');
+var processFormBody = multer({storage: multer.memoryStorage()}).single('uploadedphoto');
 var express = require('express');
 var app = express();
 
@@ -80,9 +82,9 @@ app.post('/sendmail', function(req, res){
 
     var options = {
         auth: {
-            api_key: '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'
+            api_key: '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'
         }
-    }
+    };
     var mailer = nodemailer.createTransport(sgTransport(options));
     mailer.sendMail(req.body, function(error, info){
         if(error){
@@ -104,28 +106,28 @@ app.post('/admin/login', function(request, response) {
   response.status(400).end("Incorrect password.");
 });
 
-app.post('/add/project', function(req, res) {
-  if(!req.session.admin) {
-    console.log("You are not logged in!");
-    res.status(401).end("Unauthorized");
-    return;
-  }
-  console.log(req.body);
-  Project.create({
-                  title: req.body.title,
-                  skills: req.body.skills,
-                  email: req.body.email,
-                  image: req.body.image,
-                  description: req.body.description,
-                  numVolunteers: req.body.numVolunteers,
-                  startTime: req.body.startTime,
-                  endTime: req.body.endTime,
-                  date: req.body.date,
-                  _location: req.body._location,
-                  commitment: req.body.commitment,
-                 });
-  res.status(200).send("added project");
-});
+// app.post('/add/project', function(req, res) {
+//   if(!req.session.admin) {
+//     console.log("You are not logged in!");
+//     res.status(401).end("Unauthorized");
+//     return;
+//   }
+//   console.log(req.body);
+//   Project.create({
+//                   title: req.body.title,
+//                   skills: req.body.skills,
+//                   email: req.body.email,
+//                   image: req.body.image,
+//                   description: req.body.description,
+//                   numVolunteers: req.body.numVolunteers,
+//                   startTime: req.body.startTime,
+//                   endTime: req.body.endTime,
+//                   date: req.body.date,
+//                   _location: req.body._location,
+//                   commitment: req.body.commitment,
+//                  });
+//   res.status(200).send("added project");
+// });
 
 app.get('/load/projects', function(req, res) {
   Project.find({}, function(err, projects) {
@@ -138,6 +140,61 @@ app.get('/project/:projectId', function(req, res) {
   Project.findOne({_id: projectId}, function(err, project) {
     res.status(200).send(JSON.stringify(project));
   });
+});
+
+app.post('/add/project', function(request, response){
+    
+    processFormBody(request, response, function (err) {
+        if (err) {
+            response.status(500).send(JSON.stringify(err));
+            return;
+        }
+        console.log(request);
+
+        if(!request.file){
+            response.status(400).send();
+            return;
+        }
+        // request.file has the following properties of interest
+        //      fieldname      - Should be 'uploadedphoto' since that is what we sent
+        //      originalname:  - The name of the file the user uploaded
+        //      mimetype:      - The mimetype of the image (e.g. 'image/jpeg',  'image/png')
+        //      buffer:        - A node Buffer containing the contents of the file
+        //      size:          - The size of the file in bytes
+        if(request.file.fieldname !=="uploadedphoto" || request.file.originalname===""){
+            response.status(500).send("Request properties not correctly set");
+            return;
+        }
+        // We need to create the file in the directory "images" under an unique name. We make
+        // the original file name unique by adding a unique prefix with a timestamp.
+        var timestamp = new Date().valueOf();
+        var filename = 'U' +  String(timestamp) + request.file.originalname;
+
+        fs.writeFile("./images/" + filename, request.file.buffer, function (err) {
+            // Once you have the file written into your images directory under the name
+            // filename you can create the Photo object in the database
+            if(err){
+                response.status(500).send(JSON.stringify(err));
+                return;
+            }
+            Project.create({
+                  title: request.body.title,
+                  skills: request.body.skills,
+                  email: request.body.email,
+                  image: filename,
+                  description: request.body.description,
+                  numVolunteers: request.body.numVolunteers,
+                  startTime: request.body.startTime,
+                  endTime: request.body.endTime,
+                  date: request.body.date,
+                  _location: request.body._location,
+                  commitment: request.body.commitment,
+            }, function(err, project){
+              response.status(200).send(JSON.stringify(project));
+            });
+
+        });//fs write file
+    });
 });
 
 var server = app.listen(3000, function () {
