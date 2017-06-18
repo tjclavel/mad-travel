@@ -189,6 +189,7 @@ app.post('/add/project', function(request, response){
                   // date: req.body.date,
                   // _location: req.body._location,
                   // commitment: req.body.commitment,
+
             }, function(err, project){
               response.status(200).send(JSON.stringify(project));
             });

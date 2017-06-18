@@ -7,6 +7,37 @@ cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resourc
     var Project = $resource('/project/:projectId', {projectId:'@projectId'});
     Project.get({projectId: projectId}, function(project) {
       $scope.project = project;
+
+      var date = new Date($scope.project.date);
+      $scope.project.date = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+      var date2 = new Date($scope.project.startTime);
+      $scope.project.startTime = date2.getHours();
+      if($scope.project.startTime < 12) {
+        if(date2.getMinutes() != 0) {
+          $scope.project.startTime += ":" + date2.getMinutes();
+        }
+        $scope.project.startTime += "AM";
+      } else {
+        $scope.project.startTime -= 12;
+        if(date2.getMinutes() != 0) {
+          $scope.project.startTime += ":" + date2.getMinutes();
+        }
+        $scope.project.startTime += "PM";
+      }
+      var date3 = new Date($scope.project.endTime);
+      $scope.project.endTime = date3.getHours();
+      if($scope.project.endTime < 12) {
+        if(date3.getMinutes() != 0) {
+          $scope.project.endTime += ":" + date3.getMinutes();
+        }
+        $scope.project.endTime += "AM";
+      } else {
+        $scope.project.endTime -= 12;
+        if(date3.getMinutes() != 0) {
+          $scope.project.endTime += ":" + date3.getMinutes();
+        }
+        $scope.project.endTime += "PM";
+      }
     });
 
 

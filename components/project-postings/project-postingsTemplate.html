@@ -2,10 +2,10 @@
 
 <p class="pp-slogan">Help us make the world a better place. Use this site to navigate the wide array of projects and volunteer opportunities we have here at GK.</p>
 
-<div class="pp-heroes">HEROES
-</div>
+<!--<div class="pp-heroes">HEROES
+</div>-->
 
-<div class="centered" ng-if="main.asAdministrator === true">
+<div class="pp-add-project" ng-if="main.asAdministrator === true">
   <md-button ng-click="addProject()">Add Project</md-button>
 </div>
 
@@ -29,6 +29,6 @@
       <img class="pp-project-image" ng-src="images/{{project.image}}">
       <div class="pp-orange"></div>
       <div class="pp-project-title"><h4>{{project.title}}</h4></div>
-      <div class="pp-project-title"><p>Palo Alto, CA</p></div>
+      <div class="pp-project-title"><p>{{project._location}}</p></div>
     </div>
 </div>

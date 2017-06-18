@@ -104,12 +104,19 @@
   <br/>
 
 
+<<<<<<< HEAD:components/project-add/project-addTemplate.html
 <!-- LOCATION
   <md-input-container>
     <label>Location</label>
     <input class="inp-field" type = "text" name="location" ng-model="location">
+=======
+<!-- LOCATION -->
+  <md-input-container>
+    <label>Location</label>
+    <input class="inp-field" name="location" ng-model="location">
+>>>>>>> 2d5ac65e4f3cb7933051639d17463e5291366f94:components/project-add/project-addTemplate.html
     <div ng-messages="addProject.location.$error">
-      <div ng-message="required">Numerical number is required!</div>
+      <div ng-message="required">Error</div>
     </div>
   </md-input-container>
   <br/>-->
@@ -179,6 +186,10 @@
     <input type="file" accept="image/*"  onchange="angular.element(this).scope().inputFileNameChanged(this)">
   </div>
 
-  <input type="submit" value="Submit">
+  <div>
+    <input type="file" accept="image/*"  onchange="angular.element(this).scope().inputFileNameChanged(this)">
+  </div>
+
+  <input type="submit" value="Submit" class="ap-submit">
   </form>
 </div>

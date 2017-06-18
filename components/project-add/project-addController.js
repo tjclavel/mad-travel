@@ -61,6 +61,14 @@ cs142App.controller('ProjectAddController', ['$scope', '$resource','$routeParams
         domForm.append('description', $scope.description);
         domForm.append('email', $scope.email);
         domForm.append('numVolunteers', $scope.numVolunteers);
+<<<<<<< HEAD
+=======
+        domForm.append('date', $scope.date);
+        domForm.append('startTime', $scope.startTime);
+        domForm.append('endTime', $scope.endTime);
+        domForm.append('commitment', $scope.commitment);
+        domForm.append('_location', $scope.location);
+>>>>>>> 2d5ac65e4f3cb7933051639d17463e5291366f94
 
         // Using $http to POST the form
         $http.post('/add/project', domForm
@@ -98,4 +106,8 @@ cs142App.controller('ProjectAddController', ['$scope', '$resource','$routeParams
       });
     }
 
+<<<<<<< HEAD
   }]);
+=======
+  }]);
+>>>>>>> 2d5ac65e4f3cb7933051639d17463e5291366f94
