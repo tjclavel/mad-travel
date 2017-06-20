@@ -82,7 +82,7 @@ app.post('/sendmail', function(req, res){
 
     var options = {
         auth: {
-            api_key: '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'
+            api_key: ''
         }
     };
     var mailer = nodemailer.createTransport(sgTransport(options));
