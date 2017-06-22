@@ -106,29 +106,6 @@ app.post('/admin/login', function(request, response) {
   response.status(400).end("Incorrect password.");
 });
 
-// app.post('/add/project', function(req, res) {
-//   if(!req.session.admin) {
-//     console.log("You are not logged in!");
-//     res.status(401).end("Unauthorized");
-//     return;
-//   }
-//   console.log(req.body);
-//   Project.create({
-//                   title: req.body.title,
-//                   skills: req.body.skills,
-//                   email: req.body.email,
-//                   image: req.body.image,
-//                   description: req.body.description,
-//                   numVolunteers: req.body.numVolunteers,
-//                   startTime: req.body.startTime,
-//                   endTime: req.body.endTime,
-//                   date: req.body.date,
-//                   _location: req.body._location,
-//                   commitment: req.body.commitment,
-//                  });
-//   res.status(200).send("added project");
-// });
-
 app.get('/load/projects', function(req, res) {
   Project.find({}, function(err, projects) {
     res.status(200).send(JSON.stringify(projects));
@@ -183,19 +160,36 @@ app.post('/add/project', function(request, response){
                   email: request.body.email,
                   image: filename,
                   description: request.body.description,
-                  numVolunteers: request.body.numVolunteers
-                  // startTime: req.body.startTime,
-                  // endTime: req.body.endTime,
-                  // date: req.body.date,
-                  // _location: req.body._location,
-                  // commitment: req.body.commitment,
-
+                  numVolunteers: request.body.numVolunteers,
+                  startTime: request.body.startTime,
+                  endTime: request.body.endTime,
+                  date: request.body.date,
+                  _location: request.body._location,
+                  commitment: request.body.commitment,
             }, function(err, project){
               response.status(200).send(JSON.stringify(project));
             });
 
         });//fs write file
     });
+});
+
+app.post('/delete/project/:projectId', function(request, response){
+  console.log(request.params.projectId);
+  Project.findOne({_id: request.params.projectId}).remove(function(err, project) {
+    console.log("hello");
+
+    if(err){
+      response.status(500).send(JSON.stringify(err));
+      return;
+    }
+    if(project === null){
+      response.status(400).send("No existing project");
+      return;
+    }
+    return response.status(200).send();
+  });
+
 });
 
 var server = app.listen(3000, function () {

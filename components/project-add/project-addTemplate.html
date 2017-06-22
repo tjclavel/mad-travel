@@ -58,7 +58,7 @@
   <br/>
 
 
-<!-- DATE 
+<!-- DATE -->
   <md-input-container>
     <label>Project Date</label>
     <input class="inp-field" type = "date" name="date" ng-model="date"
@@ -70,7 +70,7 @@
   <br/>
 
 
-<!-- START TIME 
+<!-- START TIME -->
   <md-input-container>
     <label>Starting Time</label>
     <input class="inp-field" type = "time" name="startTime" ng-model="startTime" required="testing">
@@ -81,7 +81,7 @@
   <br/>
 
 
-<!-- END TIME 
+<!-- END TIME -->
   <md-input-container>
     <label>End Time</label>
     <input class="inp-field" type="time" name="endTime" ng-model="endTime" required="testing">
@@ -92,7 +92,7 @@
   <br/>
 
 
-<!-- COMMITMENT 
+<!-- COMMITMENT -->
   <md-input-container>
     <label>Desired Commitment (hours)</label>
     <input class="inp-field" type = "number" name="commitment" ng-model="commitment"
@@ -103,88 +103,15 @@
   </md-input-container>
   <br/>
 
-
-<<<<<<< HEAD:components/project-add/project-addTemplate.html
-<!-- LOCATION
-  <md-input-container>
-    <label>Location</label>
-    <input class="inp-field" type = "text" name="location" ng-model="location">
-=======
 <!-- LOCATION -->
   <md-input-container>
     <label>Location</label>
-    <input class="inp-field" name="location" ng-model="location">
->>>>>>> 2d5ac65e4f3cb7933051639d17463e5291366f94:components/project-add/project-addTemplate.html
+    <input class="inp-field" type="text" name="location" ng-model="location">
     <div ng-messages="addProject.location.$error">
       <div ng-message="required">Error</div>
     </div>
   </md-input-container>
-  <br/>-->
-
-  <!--
-  <div>
-    <label>Project Title:
-        <input type="text" ng-model="title">
-      </label>
-  </div>
-
-  <div>
-      <label>Project Description:
-        <input type="password" ng-model="description">
-      </label>
-  </div>
-    
-  <div>
-      <label>Community Email:
-        <input type="text" ng-model="email">
-      </label>
-  </div>
-
-  <div>
-      <label>Volunteer Skills Required:
-        <input type="text" ng-model="skills">
-      </label>
-  </div>
-
-  <div>
-      <label>Number of Volunteers Required:
-        <input type="text" ng-model="numVolunteers">
-      </label>
-  </div>
-
-  <div>
-      <label>Description:
-        <input type="text" ng-model="description">
-      </label>
-  </div>
-
-  <div>
-      <label>Skills:
-        <input type="text" ng-model="occupation">
-      </label>
-  </div>
-
-  <div>
-      <label>Login Name:
-        <input type="text" ng-model="new_login_name">
-      </label>
-  </div>
-
-  <div>
-      <label>Password:
-        <input type="password" ng-model="first_password">
-      </label>
-  </div>
-
-  <div>
-      <label>Retype Password:
-        <input type="password" ng-model="second_password">
-      </label>
-  </div>-->
-
-  <div>
-    <input type="file" accept="image/*"  onchange="angular.element(this).scope().inputFileNameChanged(this)">
-  </div>
+  <br/>
 
   <div>
     <input type="file" accept="image/*"  onchange="angular.element(this).scope().inputFileNameChanged(this)">

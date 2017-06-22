@@ -61,6 +61,9 @@
    // Create initial comments.
    var comments = [];
 
+   //Create some initial projects
+   var projects = [];
+
    comments.forEach(function (comment) {
       var photo = photos.filter(function (photo) {
          return (photo._id === comment.photo_id);
@@ -97,7 +100,7 @@
 
    var projectModel = function() {
       return projects;
-   }
+   };
 
    var models =  {
       userListModel: userListModel,

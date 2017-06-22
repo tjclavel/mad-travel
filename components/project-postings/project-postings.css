@@ -185,6 +185,12 @@
   box-shadow: 0px 1px 1px 1px;
 }
 
+.pp-delete{
+  width: 1em;
+  height: 1em;
+  float: left;
+}
+
 .pp-orange {
   width: 21em;
   height: 0.5em;

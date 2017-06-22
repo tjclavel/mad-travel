@@ -3,4 +3,4 @@ cs142App.controller('NavBarController', ['$scope',
 
     $scope.title = "Nav";
 
-  }])
+  }]);

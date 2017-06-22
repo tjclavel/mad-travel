@@ -13,13 +13,13 @@ cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resourc
       var date2 = new Date($scope.project.startTime);
       $scope.project.startTime = date2.getHours();
       if($scope.project.startTime < 12) {
-        if(date2.getMinutes() != 0) {
+        if(date2.getMinutes() !== 0) {
           $scope.project.startTime += ":" + date2.getMinutes();
         }
         $scope.project.startTime += "AM";
       } else {
         $scope.project.startTime -= 12;
-        if(date2.getMinutes() != 0) {
+        if(date2.getMinutes() !== 0) {
           $scope.project.startTime += ":" + date2.getMinutes();
         }
         $scope.project.startTime += "PM";
@@ -27,13 +27,13 @@ cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resourc
       var date3 = new Date($scope.project.endTime);
       $scope.project.endTime = date3.getHours();
       if($scope.project.endTime < 12) {
-        if(date3.getMinutes() != 0) {
+        if(date3.getMinutes() !== 0) {
           $scope.project.endTime += ":" + date3.getMinutes();
         }
         $scope.project.endTime += "AM";
       } else {
         $scope.project.endTime -= 12;
-        if(date3.getMinutes() != 0) {
+        if(date3.getMinutes() !== 0) {
           $scope.project.endTime += ":" + date3.getMinutes();
         }
         $scope.project.endTime += "PM";
@@ -43,7 +43,6 @@ cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resourc
 
     /*console.log("from PV");
     console.log($scope.main.projects);
-
     $scope.project = $scope.main.projects[$routeParams.id];
     console.log($scope.main.projects);*/
     /*$scope.project = {};
@@ -69,4 +68,4 @@ cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resourc
         $scope.serverMessage = "Email sent successfully";
       });
     };
-  }])
+  }]);

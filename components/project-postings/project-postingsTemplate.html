@@ -2,9 +2,6 @@
 
 <p class="pp-slogan">Help us make the world a better place. Use this site to navigate the wide array of projects and volunteer opportunities we have here at GK.</p>
 
-<!--<div class="pp-heroes">HEROES
-</div>-->
-
 <div class="pp-add-project" ng-if="main.asAdministrator === true">
   <md-button ng-click="addProject()">Add Project</md-button>
 </div>
@@ -22,13 +19,13 @@
   </span>
 </div>
 
-
-
 <div class="pp-projects">
-    <div class="pp-project" ng-repeat="project in main.projects" ng-click="goto_project(project._id)">
-      <img class="pp-project-image" ng-src="images/{{project.image}}">
-      <div class="pp-orange"></div>
-      <div class="pp-project-title"><h4>{{project.title}}</h4></div>
-      <div class="pp-project-title"><p>{{project._location}}</p></div>
-    </div>
+  
+  <div class="pp-project" ng-repeat="project in main.projects">
+    <img ng-show="main.asAdministrator === true" class="pp-delete" ng-src = "images/delete_button.ico" ng-click="delete_project(project._id)">
+    <img class="pp-project-image" ng-src="images/{{project.image}}" ng-click="goto_project(project._id)">
+    <div class="pp-orange"></div>
+    <div class="pp-project-title"><h4>{{project.title}}</h4></div>
+    <div class="pp-project-title"><p>{{project._location}}</p></div>
+  </div>
 </div>

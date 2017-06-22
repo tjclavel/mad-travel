@@ -34,11 +34,6 @@ cs142App.controller('MainController', ['$scope', '$resource',
     function ($scope, $resource) {
         $scope.main = {asAdministrator: false};
 
-        $scope.main.projects = [];
-
-        console.log("from Main");
-        console.log($scope.projects);
-
         $scope.login = function() {
           window.location = "#/login";
         };
