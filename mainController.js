@@ -32,7 +32,7 @@ cs142App.config(['$routeProvider',
 
 cs142App.controller('MainController', ['$scope', '$resource',
     function ($scope, $resource) {
-        $scope.main = {asAdministrator: false};
+        $scope.main = {asAdministrator: false, sort_criteria: "earliest_start_date_first"};
 
         $scope.login = function() {
           window.location = "#/login";

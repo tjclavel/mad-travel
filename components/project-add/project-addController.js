@@ -36,8 +36,8 @@ cs142App.controller('ProjectAddController', ['$scope', '$resource','$routeParams
         domForm.append('email', $scope.email);
         domForm.append('numVolunteers', $scope.numVolunteers);
         domForm.append('date', $scope.date);
-        domForm.append('startTime', $scope.startTime);
-        domForm.append('endTime', $scope.endTime);
+        /*domForm.append('startTime', $scope.startTime);
+        domForm.append('endTime', $scope.endTime);*/
         domForm.append('commitment', $scope.commitment);
         domForm.append('_location', $scope.location);
 

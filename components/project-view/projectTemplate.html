@@ -20,15 +20,17 @@
   <div class="flexbox-container">
     <div class="flexbox-item" id="flexbox-item1">
       <img class="pt-project-image" ng-src="images/{{project.image}}">
-      <div class="pt-orange"></div>
       <p class="project-description">{{project.description}}</p>
+      <div class="pt-orange"></div>
       <div class="centered">
-      <div id="project-field-names">
+      <!--<div id="project-field-names">
         <p class="project-field">Date:</p>
         <p class="project-field">Time:</p>
         <p class="project-field">Commitment:</p>
         <p class="project-field">Location:</p>
         <p class="project-field">Required Skills:</p>
+        <p class="project-field">Number of Volunteers Needed:</p>
+        <p class="project-field">Number of Volunteers Signed Up:</p>
       </div>
       <div id="project-field-values">
         <p class="project-field-">{{project.date}}</p>
@@ -36,7 +38,47 @@
         <p class="project-field-">{{project.commitment}} hours</p>
         <p class="project-field-">{{project._location}}</p>
         <p class="project-field-">{{project.skills}}</p>
-      </div>
+        <p class="project-field-">{{project.numVolunteers}}</p>
+        <p class="project-field-">{{project.numVolunteersSignedUp}}</p>
+      </div>-->
+        <table class="project-info-table">
+          <tr>
+            <th class="project-info-th">Date:</th>
+            <td class="project-info-td">{{project.date}}</td>
+          </tr>
+
+          <!--<tr>
+            <th class="project-info-th">Time:</th>
+            <td class="project-info-td">{{project.startTime}} - {{project.endTime}}</td>
+          </tr>-->
+
+          <tr>
+            <th class="project-info-th">Commitment:</th>
+            <td class="project-info-td">{{project.commitment}}</td>
+          </tr>
+
+          <tr>
+            <th class="project-info-th">Location:</th>
+            <td class="project-info-td">{{project._location}}</td>
+          </tr>
+
+          <tr>
+            <th class="project-info-th">Required Skills:</th>
+            <td class="project-info-td">{{project.skills}}</td>
+          </tr>
+
+          <tr>
+            <th class="project-info-th">Volunteers Needed:</th>
+            <td class="project-info-td">{{project.numVolunteers}}</td>
+          </tr>
+
+          <tr>
+            <th class="project-info-th">Volunteers Signed Up:</th>
+            <td class="project-info-td">{{project.numVolunteersSignedUp}}</td>
+          </tr>
+
+        </table>
+
       </div>
     </div>
 
@@ -49,11 +91,14 @@
           <input type="text" ng-model="interest.name" required placeholder="Name">
           <input type="text" ng-model="interest.email" required placeholder="Email">
 
-          <select id="country" name="country">
+          <!--<select id="country" name="country">
           <option value="philippines">Philippines</option>
           <option value="australia">Australia</option>
           <option value="canada">Canada</option>
-          <option value="usa">USA</option>
+          <option value="usa">USA</option>-->
+
+          <select ng-model="interest.country" ng-options="country for country in countries">
+          </select>
 
           <textarea class="volunteer-essay" required placeholder="Why do you want to volunteer?&#10;(100 words or less)"></textarea>
           </select>
@@ -62,6 +107,21 @@
       </md-content>
     </div>
   </div>
+
+  <table class="volunteer-info-table" ng-show="main.asAdministrator === true">
+    <tr>
+      <th class="volunteer-info-th">Name</th>
+      <th class="volunteer-info-th">Email</th>
+      <th class="volunteer-info-th">Country</th>
+    </tr>
+
+    <tr ng-repeat="volunteer in project.volunteers">
+      <td class="volunteer-info-td">{{volunteer.name}}</td>
+      <td class="volunteer-info-td">{{volunteer.email}}</td>
+      <td class="volunteer-info-td">{{volunteer.country}}</td>
+    </tr>
+
+  </table>
 
   
 </div>

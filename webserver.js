@@ -82,7 +82,7 @@ app.post('/sendmail', function(req, res){
 
     var options = {
         auth: {
-            api_key: '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'
+            api_key: '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'
         }
     };
     var mailer = nodemailer.createTransport(sgTransport(options));
@@ -106,10 +106,19 @@ app.post('/admin/login', function(request, response) {
   response.status(400).end("Incorrect password.");
 });
 
-app.get('/load/projects', function(req, res) {
-  Project.find({}, function(err, projects) {
-    res.status(200).send(JSON.stringify(projects));
-  });
+app.get('/load/projects/:sort_criteria', function(req, res) {
+  var sort_criteria = req.params.sort_criteria;
+
+  if(sort_criteria === "lowest_commitment_first"){
+    Project.find({}).sort({commitment: 1}).exec(function(err, projects) {
+      res.status(200).send(JSON.stringify(projects));
+    });
+  }else if(sort_criteria === "earliest_start_date_first"){
+    Project.find({}).sort({date: 1}).exec(function(err, projects) {
+      res.status(200).send(JSON.stringify(projects));
+    });
+  }
+
 });
 
 app.get('/project/:projectId', function(req, res) {
@@ -161,8 +170,10 @@ app.post('/add/project', function(request, response){
                   image: filename,
                   description: request.body.description,
                   numVolunteers: request.body.numVolunteers,
-                  startTime: request.body.startTime,
-                  endTime: request.body.endTime,
+                  numVolunteersSignedUp: 0,
+                  volunteers: [],
+                  /*startTime: request.body.startTime,
+                  endTime: request.body.endTime,*/
                   date: request.body.date,
                   _location: request.body._location,
                   commitment: request.body.commitment,
@@ -188,6 +199,33 @@ app.post('/delete/project/:projectId', function(request, response){
       return;
     }
     return response.status(200).send();
+  });
+
+});
+
+app.post('/volunteer_signed_up/:projectId', function(request, response){
+  var volunteer = request.body.volunteer;
+
+  Project.findOne({_id: request.params.projectId}, function(err, project) {
+
+    if(err){
+      response.status(500).send(JSON.stringify(err));
+      return;
+    }
+
+    if(project === null){
+      response.status(400).send("No existing project");
+      return;
+    }
+
+    project.numVolunteersSignedUp = project.numVolunteersSignedUp + 1;
+    project.volunteers.push(volunteer);
+
+    project.save();
+
+    console.log(project);
+
+    response.status(200).send(JSON.stringify(project));
   });
 
 });

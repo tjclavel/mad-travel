@@ -8,10 +8,9 @@
 
 <div class="pp-sorter">
   <div class="pp-mySelectWrapper">
-    <select class="pp-mySelect">
-      <option value="relevance">Relevance</option>
-      <option value="atoz">A to Z</option>
-      <option value="ztoa"> Z to A</option>
+    <select class="pp-mySelect" ng-model="main.sort_criteria" ng-change="reorder_projects()">
+      <option value="earliest_start_date_first">Earliest Start Date First</option>
+      <option value="lowest_commitment_first">Lowest Commitment First</option>
     </select>
   </div>
   <span class="pp-sorter-label">

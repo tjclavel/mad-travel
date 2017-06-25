@@ -5,9 +5,9 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$locat
       $location.path("/add/project");
     };
 
-    var resource = $resource('/load/projects');
-    $scope.main.projects = resource.query(function() {
-      console.log($scope.main.projects);
+    var resource = $resource('/load/projects/' + $scope.main.sort_criteria);
+    resource.query(function(projects){
+      $scope.main.projects = projects;
     });
 
     $scope.goto_project = function(id) {
@@ -55,5 +55,13 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$locat
           },
       });
     };
+
+    $scope.reorder_projects = function(){
+      var resource = $resource('/load/projects/' + $scope.main.sort_criteria);
+      resource.query(function(projects){
+          $scope.main.projects = projects;
+          $route.reload();
+      });
+    }
 
   }]);

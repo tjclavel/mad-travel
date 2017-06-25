@@ -9,8 +9,10 @@ var projectSchema = new mongoose.Schema({
   description: String,
   email: String,
   numVolunteers: Number,
-  startTime: String,
-  endTime: String,
+  numVolunteersSignedUp: Number,
+  volunteers: [],
+  /*startTime: String,
+  endTime: String,*/
   date: String,
   _location: String,
   commitment: Number
