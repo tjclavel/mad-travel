@@ -1,13 +1,13 @@
 {
-  "name": "cs142password",
+  "name": "mad-travel-volunteer-platform",
   "version": "1.0.0",
-  "description": "CS142 Project #6 - Photo Sharing App with DB",
-  "main": "webServer.js",
+  "description": "Volunteer platform for MAD Travel, which is a GK subsidiary",
+  "main": "server.js",
   "scripts": {
     "test": "echo Test your code by opening http://localhost:3000 in your browser.",
     "jshint": "jshint --config .jshintrc --exclude=node_modules,test . || exit 0"
   },
-  "author": "Mendel Rosenblum <mendel@cs.stanford.edu> (http://www.stanford.edu/~mendel)",
+  "author": "Thomas Clavelli, Danielle Limcaoco, Mika Limcaoco, Heqing Yang, Miguel Ayala, Jaime Deverall",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.4.9 <1.6",
