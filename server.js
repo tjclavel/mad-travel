@@ -35,7 +35,6 @@ var mongoose = require('mongoose');
 var async = require('async');
 var session = require('express-session');
 
-
 // Load the Mongoose schema for User, Photo, and SchemaInfo
 var User = require('./schema/user.js');
 var Photo = require('./schema/photo.js');
@@ -47,11 +46,10 @@ var processFormBody = multer({storage: multer.memoryStorage()}).single('uploaded
 var express = require('express');
 var app = express();
 
-// XXX - Your submission should work without this line
-//var cs142models = require('./modelData/photoApp.js').cs142models;
 
-mongoose.connect('mongodb://localhost/cs142project6');
-
+//'mongodb://localhost/cs142project6'
+//Use above when working on localhost.
+mongoose.connect('mongodb://heroku_p7ts0pjd:ctfmgmvcei6rqvp337dsp385ug@ds151662.mlab.com:51662/heroku_p7ts0pjd');
 // We have the express static module (http://expressjs.com/en/starter/static-files.html) do all
 // the work for us.
 
@@ -230,9 +228,18 @@ app.post('/volunteer_signed_up/:projectId', function(request, response){
 
 });
 
-var server = app.listen(3000, function () {
-    var port = server.address().port;
-    console.log('Listening at http://localhost:' + port + ' exporting the directory ' + __dirname);
+// var server = app.listen(3000, function () {
+//     var port = server.address().port;
+//     console.log('Listening at http://localhost:' + port + ' exporting the directory ' + __dirname);
+// });
+
+
+var port = process.env.PORT || 3000;
+
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
 });
+
+
 
 
