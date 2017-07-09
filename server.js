@@ -46,10 +46,6 @@ var processFormBody = multer({storage: multer.memoryStorage()}).single('uploaded
 var express = require('express');
 var app = express();
 
-
-//'mongodb://localhost/cs142project6'
-//Use above when working on localhost.
-mongoose.connect('mongodb://heroku_p7ts0pjd:ctfmgmvcei6rqvp337dsp385ug@ds151662.mlab.com:51662/heroku_p7ts0pjd');
 // We have the express static module (http://expressjs.com/en/starter/static-files.html) do all
 // the work for us.
 
@@ -233,12 +229,24 @@ app.post('/volunteer_signed_up/:projectId', function(request, response){
 //     console.log('Listening at http://localhost:' + port + ' exporting the directory ' + __dirname);
 // });
 
+//'mongodb://localhost/cs142project6'
+//Use above when working on localhost.
+mongoose.connect(process.env.MONGODB_URI, function(err, database){
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
 
-var port = process.env.PORT || 3000;
+  console.log("Database connection ready");
 
-app.listen(port, function() {
-    console.log('Our app is running on http://localhost:' + port);
+  // Initialize the app.
+  var server = app.listen(process.env.PORT || 8080, function () {
+    var port = server.address().port;
+    console.log("App now running on port", port);
+  });
 });
+
+
 
 
 
