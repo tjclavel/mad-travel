@@ -32,8 +32,11 @@
  */
 
 var mongoose = require('mongoose');
+var Grid = require('gridfs-stream');
+var gfs;
 var async = require('async');
 var session = require('express-session');
+var stream = require('stream');
 
 // Load the Mongoose schema for User, Photo, and SchemaInfo
 var User = require('./schema/user.js');
@@ -76,7 +79,7 @@ app.post('/sendmail', function(req, res){
 
     var options = {
         auth: {
-            api_key: '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'
+            api_key: process.env.SG_API_KEY
         }
     };
     var mailer = nodemailer.createTransport(sgTransport(options));
@@ -122,6 +125,14 @@ app.get('/project/:projectId', function(req, res) {
   });
 });
 
+app.get('/download_image/:image_id', function(req, res) {
+  console.log("Hello");
+   var readstream = gfs.createReadStream({
+      _id: req.params.image_id
+   });//it is not finding a file with this ID
+   readstream.pipe(res);
+}); //change the front-end code
+
 app.post('/add/project', function(request, response){
     
     processFormBody(request, response, function (err) {
@@ -150,32 +161,36 @@ app.post('/add/project', function(request, response){
         var timestamp = new Date().valueOf();
         var filename = 'U' +  String(timestamp) + request.file.originalname;
 
-        fs.writeFile("./images/" + filename, request.file.buffer, function (err) {
-            // Once you have the file written into your images directory under the name
-            // filename you can create the Photo object in the database
-            if(err){
-                response.status(500).send(JSON.stringify(err));
-                return;
-            }
-            Project.create({
-                  title: request.body.title,
-                  skills: request.body.skills,
-                  email: request.body.email,
-                  image: filename,
-                  description: request.body.description,
-                  numVolunteers: request.body.numVolunteers,
-                  numVolunteersSignedUp: 0,
-                  volunteers: [],
-                  /*startTime: request.body.startTime,
-                  endTime: request.body.endTime,*/
-                  date: request.body.date,
-                  _location: request.body._location,
-                  commitment: request.body.commitment,
-            }, function(err, project){
-              response.status(200).send(JSON.stringify(project));
-            });
+        var bufferStream = new stream.PassThrough();
+        bufferStream.end(request.file.buffer);
 
-        });//fs write file
+        var writestream = gfs.createWriteStream({
+          filename: filename,
+          mode: 'w',
+          content_type: request.file.mimetype,
+        });
+
+        bufferStream.pipe(writestream);
+
+        writestream.on('close', function(file) {
+          Project.create({
+            title: request.body.title,
+            skills: request.body.skills,
+            email: request.body.email,
+            image_id: file._id,
+            description: request.body.description,
+            numVolunteers: request.body.numVolunteers,
+            numVolunteersSignedUp: 0,
+            volunteers: [],
+            date: request.body.date,
+            _location: request.body._location,
+            commitment: request.body.commitment,
+          }, function(err, project){
+              console.log("project added successfully");
+              response.status(200).send(JSON.stringify(project));
+          });
+
+        });
     });
 });
 
@@ -230,8 +245,9 @@ app.post('/volunteer_signed_up/:projectId', function(request, response){
 // });
 
 //'mongodb://localhost/cs142project6'
+//process.env.MONGODB_URI
 //Use above when working on localhost.
-mongoose.connect(process.env.MONGODB_URI, function(err, database){
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/cs142project6', function(err){
   if (err) {
     console.log(err);
     process.exit(1);
@@ -239,12 +255,36 @@ mongoose.connect(process.env.MONGODB_URI, function(err, database){
 
   console.log("Database connection ready");
 
+  gfs = Grid(mongoose.connection.db, mongoose.mongo);
+
   // Initialize the app.
-  var server = app.listen(process.env.PORT || 8080, function () {
+  var server = app.listen(process.env.PORT || 3000, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
   });
 });
+
+
+
+// function putFile(path, name, callback) {
+//     var writestream = GridFS.createWriteStream({
+//         filename: name
+//     });
+//     writestream.on('close', function (file) {
+//       callback(null, file);
+//     });
+//     fs.createReadStream(path).pipe(writestream);
+// }
+
+// try {
+//     var readstream = GridFS.createReadStream({filename: filename});
+//     readstream.pipe(res);
+// } catch (err) {
+//     log.error(err);
+//     return next(errors.create(404, "File not found."));
+// }
+
+
 
 
 

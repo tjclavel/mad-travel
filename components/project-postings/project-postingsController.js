@@ -1,5 +1,5 @@
-cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$location', '$mdDialog', '$route',
-  function($scope, $resource, $location, $mdDialog, $route) {
+cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$location', '$mdDialog', '$route', '$sce', '$http', '$q',
+  function($scope, $resource, $location, $mdDialog, $route, $sce, $http, $q) {
 
     $scope.addProject = function() {
       $location.path("/add/project");
@@ -7,7 +7,39 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$locat
 
     var resource = $resource('/load/projects/' + $scope.main.sort_criteria);
     resource.query(function(projects){
-      $scope.main.projects = projects;
+      promises = [];
+      projects.forEach(function(project){
+        promises.push(
+          $http({
+            method: 'GET',
+            url: '/download_image/' + project.image_id,
+            responseType: 'arraybuffer'
+          }).then(function(response) {
+            var file = new Blob([response.data], {type: 'image/jpeg'});
+            var fileURL = URL.createObjectURL(file);
+            project.image_url = $sce.trustAsResourceUrl(fileURL);
+          })
+        )
+      })
+      $q.all(promises).then(function(){
+        $scope.main.projects = projects;
+      });
+      // async.each(projects, function (project, callback) {
+      //   $http({
+      //     method: 'GET',
+      //     url: '/download_image/' + project.filename,
+      //     responseType: 'arraybuffer'
+      //   }).then(function successCallback(response) {
+      //     var file = new Blob([resp.data], {type: 'image/jpeg'});
+      //     var fileURL = URL.createObjectURL(file);
+      //     project.image_url = $sce.trustAsResourceUrl(fileURL);
+      //     callback();
+      //   }, function errorCallback(response) {
+      //     callback(response);
+      //   });
+      // }, function(err){
+        
+      // });
     });
 
     $scope.goto_project = function(id) {

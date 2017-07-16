@@ -1,42 +1,22 @@
-cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resource',
-  function($scope, $routeParams, $resource) {
+cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resource', '$http', '$sce',
+  function($scope, $routeParams, $resource, $http, $sce) {
 
     var projectId = $routeParams.id;
 
     var Project = $resource('/project/' + projectId);
     Project.get(function(project) {
-      $scope.project = project;
-
-      var date = new Date($scope.project.date);
-      $scope.project.date = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
-      /*var date2 = new Date($scope.project.startTime);
-      $scope.project.startTime = date2.getHours();
-      if($scope.project.startTime < 12) {
-        if(date2.getMinutes() !== 0) {
-          $scope.project.startTime += ":" + date2.getMinutes();
-        }
-        $scope.project.startTime += "AM";
-      } else {
-        $scope.project.startTime -= 12;
-        if(date2.getMinutes() !== 0) {
-          $scope.project.startTime += ":" + date2.getMinutes();
-        }
-        $scope.project.startTime += "PM";
-      }
-      var date3 = new Date($scope.project.endTime);
-      $scope.project.endTime = date3.getHours();
-      if($scope.project.endTime < 12) {
-        if(date3.getMinutes() !== 0) {
-          $scope.project.endTime += ":" + date3.getMinutes();
-        }
-        $scope.project.endTime += "AM";
-      } else {
-        $scope.project.endTime -= 12;
-        if(date3.getMinutes() !== 0) {
-          $scope.project.endTime += ":" + date3.getMinutes();
-        }
-        $scope.project.endTime += "PM";
-      }*/
+      $http({
+        method: 'GET',
+        url: '/download_image/' + project.image_id,
+        responseType: 'arraybuffer'
+      }).then(function(response) {
+          var file = new Blob([response.data], {type: 'image/jpeg'});
+          var fileURL = URL.createObjectURL(file);
+          project.image_url = $sce.trustAsResourceUrl(fileURL);
+          var date = new Date(project.date);
+          project.date = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+          $scope.project = project;
+      })
     });
 
     $scope.interest = {};

@@ -22,9 +22,11 @@
   
   <div class="pp-project" ng-repeat="project in main.projects">
     <img ng-show="main.asAdministrator === true" class="pp-delete" ng-src = "images/delete_button.ico" ng-click="delete_project(project._id)">
-    <img class="pp-project-image" ng-src="images/{{project.image}}" ng-click="goto_project(project._id)">
+    <img class="pp-project-image" ng-src="{{project.image_url}}" ng-click="goto_project(project._id)">
     <div class="pp-orange"></div>
     <div class="pp-project-title"><h4>{{project.title}}</h4></div>
     <div class="pp-project-title"><p>{{project._location}}</p></div>
   </div>
+
+  <!--ng-src="images/{{project.image}}"-->
 </div>
