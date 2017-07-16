@@ -4,9 +4,14 @@
   position: relative;
 }
 
-#toolbar-image {
+#toolbar-image-logo {
   position: absolute;
   left: 3em;
+}
+
+#toolbar-image-home {
+  position: absolute;
+  right: 3em;
 }
 
 #toolbar img {
