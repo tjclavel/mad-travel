@@ -9,10 +9,6 @@ cs142App.config(['$routeProvider',
                 templateUrl: 'components/project-postings/project-postingsTemplate.html',
                 controller: 'ProjectPostingsController'
             }).
-            when('/nav', {
-                templateUrl: 'components/nav-bar/nav-barTemplate.html',
-                controller: 'NavBarController'
-            }).
             when('/login', {
                 templateUrl: 'components/login/loginTemplate.html',
                 controller: 'LoginController'
@@ -35,6 +31,10 @@ cs142App.controller('MainController', ['$scope', '$resource',
         $scope.main = {asAdministrator: false, sort_criteria: "earliest_start_date_first"};
 
         $scope.login = function() {
-          window.location = "#/login";
+            window.location = "#/login";
         };
+
+        $scope.projectsViewCurrentlyDisplayed = function() {
+            return $scope.main.currentView === "projectsView"
+        }
     }]);

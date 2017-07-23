@@ -1,6 +1,6 @@
 cs142App.controller('LoginController', ['$scope', '$resource',
     function ($scope, $resource) {
-
+      $scope.main.currentView = "loginView"
       $scope.title = 'Login';
 
       $scope.login = {};

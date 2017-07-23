@@ -19,9 +19,6 @@
         <script src="mainController.js"></script>
         <link rel="stylesheet" type="text/css" href="main.css" />
 
-        <script src="components/nav-bar/nav-barController.js"></script>
-        <link rel="stylesheet" type="text/css" href="components/nav-bar/nav-bar.css" />
-
         <script src="node_modules/angular-resource/angular-resource.js"></script>
 
         <script src="components/project-postings/project-postingsController.js"></script>
@@ -41,9 +38,11 @@
     <body layout="column">
 
         <md-toolbar id="toolbar" layout = "row">
-          <a id="toolbar-image-logo" href="#/posts"><img ng-src="/images/mad-travel.png"/></a>
-          <a id="toolbar-go-to-mad" href="http://madtravel.org/">About MAD Travel</a>
-          <a id="toolbar-home-link" href="#/posts">Projects</a>
+          <div class="container">
+            <img ng-src="/images/mad-travel.png"/>
+            <a href="http://madtravel.org/">About MAD Travel</a>
+            <a href="#/posts">Projects</a>
+          </div>
         </md-toolbar>
 
         <div class="container" flex layout="row">
@@ -54,11 +53,11 @@
 
         </div>
 
-        <div class="main-login">
-          <md-button ng-click="login()" ng-if="!main.asAdministrator">
+        <div class="main-login" ng-show="projectsViewCurrentlyDisplayed()">
+          <md-button ng-click="login()" ng-show="!main.asAdministrator">
             Login as Administrator
           </md-button>
-          <md-button ng-click="main.asAdministrator = false;" ng-if="main.asAdministrator">
+          <md-button ng-click="main.asAdministrator = false;" ng-show="main.asAdministrator">
             Logout
           </md-button>
         </div>

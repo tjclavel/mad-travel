@@ -1,49 +1,13 @@
 <div class="centered" id="project-view-container">
-<!--  <h2 class="title">{{project.title}}</h2>
-  <h3 class="project-description slogan">{{project.description}}</h3>
-  <h3 class="project-description slogan">Number of Volunteers needed: {{project.numVolunteers}}</h3>
-  <form ng-submit="sendInterest()" class="centered">
-    <md-input-container>
-      <label>Email</label>
-      <input type="text" ng-model="interest.email" required>
-    </md-input-container>
-    <br/>
-    <md-input-container>
-      <label>Name</label>
-      <input type="text" ng-model="interest.name" required>
-    </md-input-container>
-    <br/>
-    <input type="submit"></input>
-  </form>-->
-
-  <h2 class="title">{{project.title.toUpperCase()}}</h2>
   <div class="flexbox-container">
     <div class="flexbox-item" id="flexbox-item1">
       <img class="pt-project-image" ng-src="{{project.image_url}}">
-      <p class="project-description">{{project.description}}</p>
+      <h3 class="project-description">{{project.description}}</h3>
       <div class="pt-orange"></div>
       <div class="centered">
-      <!--<div id="project-field-names">
-        <p class="project-field">Date:</p>
-        <p class="project-field">Time:</p>
-        <p class="project-field">Commitment:</p>
-        <p class="project-field">Location:</p>
-        <p class="project-field">Required Skills:</p>
-        <p class="project-field">Number of Volunteers Needed:</p>
-        <p class="project-field">Number of Volunteers Signed Up:</p>
-      </div>
-      <div id="project-field-values">
-        <p class="project-field-">{{project.date}}</p>
-        <p class="project-field-">{{project.startTime}} - {{project.endTime}}</p>
-        <p class="project-field-">{{project.commitment}} hours</p>
-        <p class="project-field-">{{project._location}}</p>
-        <p class="project-field-">{{project.skills}}</p>
-        <p class="project-field-">{{project.numVolunteers}}</p>
-        <p class="project-field-">{{project.numVolunteersSignedUp}}</p>
-      </div>-->
         <table class="project-info-table">
           <tr>
-            <th class="project-info-th">Date:</th>
+            <th class="project-info-th">Start Date:</th>
             <td class="project-info-td">{{project.date}}</td>
           </tr>
 
@@ -53,7 +17,7 @@
           </tr>-->
 
           <tr>
-            <th class="project-info-th">Commitment:</th>
+            <th class="project-info-th">Desired Commitment (Hours):</th>
             <td class="project-info-td">{{project.commitment}}</td>
           </tr>
 
@@ -72,11 +36,6 @@
             <td class="project-info-td">{{project.numVolunteers}}</td>
           </tr>
 
-          <tr>
-            <th class="project-info-th">Volunteers Signed Up:</th>
-            <td class="project-info-td">{{project.numVolunteersSignedUp}}</td>
-          </tr>
-
         </table>
 
       </div>
@@ -86,25 +45,20 @@
       <div class="form-toolbar">
         <h3 class="volunteer-registration">Volunteer Registration</h3>
       </div>
-      <md-content>
-        <form ng-submit="sendInterest()" class="centered">
-          <input type="text" ng-model="interest.name" required placeholder="Name">
-          <input type="text" ng-model="interest.email" required placeholder="Email">
+      <form name="signupForm" ng-submit="sendInterest()" class="centered">
 
-          <!--<select id="country" name="country">
-          <option value="philippines">Philippines</option>
-          <option value="australia">Australia</option>
-          <option value="canada">Canada</option>
-          <option value="usa">USA</option>-->
+        <input type="text" ng-model="interest.name" required placeholder="Name">
 
-          <select ng-model="interest.country" ng-options="country for country in countries">
-          </select>
+        <input type="text" ng-model="interest.email" required placeholder="Email">
 
-          <textarea class="volunteer-essay" required placeholder="Why do you want to volunteer?&#10;(100 words or less)"></textarea>
-          </select>
-          <input type="submit"></input>
-        </form>
-      </md-content>
+        <select ng-model="interest.country" required ng-options="country for country in countries">
+          <option value="">-- Select your country --</option>
+        </select>
+
+        <textarea name="essay" ng-model="interest.essay" required  placeholder="Tell us a bit about yourself! Why do you want to volunteer? (100 words or less)"></textarea>
+
+        <input type="submit"></input>
+      </form>
     </div>
   </div>
 
@@ -122,6 +76,5 @@
     </tr>
 
   </table>
-
   
 </div>

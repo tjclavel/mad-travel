@@ -53,27 +53,6 @@ md-input-container{
   height: 15px;
 }
 
-/*#project-field-names {
-  width: 20%;
-  display: inline-block;
-  text-align: left;
-}
-
-#project-field-values {
-  width: 50%;
-  display: inline-block;
-  text-align: left;
-}
-
-.project-field {
-  font-weight: 800;
-  margin: 4px;
-}
-
-.project-field- {
-  margin: 5px;
-}*/
-
 .project-info-table{
   border-collapse: collapse;
 }
@@ -99,13 +78,6 @@ md-input-container{
 
 .volunteer-info-th{
   text-align: left;
-}
-
-.title{
-  font-size: 3.5em;
-  text-align: center;
-  font-style: bold;
-  font-weight: 400em;
 }
 
 .flexbox-container{

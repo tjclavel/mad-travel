@@ -5,7 +5,7 @@
  <!--TITLE-->
   <md-input-container>
     <label>Project Title</label>
-    <input name="title" ng-model="title" required md-maxlength="20">
+    <input name="title" ng-model="title" required md-maxlength="75">
     <div ng-messages="addProject.title.$error">
       <div ng-message="required">This is required!</div>
     </div>
@@ -60,7 +60,7 @@
 
 <!-- DATE -->
   <md-input-container>
-    <label>Project Date</label>
+    <label>Project Start Date</label>
     <input class="inp-field" type="date" name="date" ng-model="date"
     required="testing">
     <div ng-messages="addProject.date.$error">

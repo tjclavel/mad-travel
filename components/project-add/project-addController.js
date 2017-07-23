@@ -1,6 +1,6 @@
 cs142App.controller('ProjectAddController', ['$scope', '$resource','$routeParams', '$http', '$location',
   function($scope, $resource, $routeParams, $http, $location) {
-    //var projectId = $routeParams.id;
+    $scope.main.currentView = "addProjectView"
     $scope.message = "";
 
     var selectedPhotoFile;   // Holds the last file selected by the user

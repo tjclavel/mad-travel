@@ -4,14 +4,12 @@
   position: relative;
 }
 
-#toolbar-image-logo {
-  position: absolute;
-  left: 3em;
-}
-
-#toolbar-image-home {
-  position: absolute;
-  right: 3em;
+.container {
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
 }
 
 #toolbar img {
