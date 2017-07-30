@@ -1,110 +1,114 @@
 <div id="add-project">
-<h2 class="title">Add Project</h2>
-<form id="add-project-form" class="centered" name="addProject" ng-submit="createProject()">
 
- <!--TITLE-->
-  <md-input-container>
-    <label>Project Title</label>
-    <input name="title" ng-model="title" required md-maxlength="75">
-    <div ng-messages="addProject.title.$error">
-      <div ng-message="required">This is required!</div>
+  <h2 class="title">Add Project</h2>
+
+  <form id="add-project-form" class="centered" name="addProject" ng-submit="createProject()">
+
+   <!--PROJECT TITLE-->
+    <md-input-container>
+      <label>Project Title</label>
+      <input name="title" ng-model="title" required md-maxlength="75">
+      <div ng-messages="addProject.title.$error">
+        <div ng-message="required">This is required!</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+
+    <!-- PROJECT sDESCRIPTION -->
+    <md-input-container>
+      <label>Project Description</label>
+      <textarea name="description" ng-model="description" required md-maxlength="300"></textarea>
+      <div ng-messages="addProject.description.$error">
+        <div ng-message="required">This is required!</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+
+  <!-- EMAIL OF COMMUNITY HEAD -->
+    <md-input-container>
+      <label>Email of Community Head</label>
+      <input class="inp-field" name="email" ng-model="email" required>
+      <div ng-messages="addProject.email.$error">
+        <div ng-message="required">This is required!</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+
+  <!-- SKILLS -->
+    <md-input-container>
+      <label>Skills Wanted (separate by comma)</label>
+      <input class="inp-field" name="skills" ng-model="skills" required>
+      <div ng-messages="addProject.skills.$error">
+        <div ng-message="required">This is required!</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+
+  <!-- NUM VOLUNTEERS -->
+    <md-input-container>
+      <label>Number of Volunteers</label>
+      <input class="inp-field" type = "number" name="numVolunteers" ng-model="numVolunteers"
+      required>
+      <div ng-messages="addProject.numVolunteers.$error">
+        <div ng-message="required">Numerical number is required!</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+
+  <!-- START DATE -->
+    <md-input-container>
+      <label>Project Start Date</label>
+      <input class="inp-field" type="date" name="startDate" ng-model="startDate"
+      required>
+      <div ng-messages="addProject.startDate.$error">
+        <div ng-message="required">Numerical number is required!</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+    <!-- END DATE -->
+    <md-input-container>
+      <label>Project End Date</label>
+      <input class="inp-field" type="date" name="endDate" ng-model="endDate"
+      required>
+      <div ng-messages="addProject.endDate.$error">
+        <div ng-message="required">Numerical number is required!</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+  <!-- COMMITMENT -->
+    <md-input-container>
+      <label>Desired Commitment (hours)</label>
+      <input class="inp-field" type="number" name="commitment" ng-model="commitment"
+      required>
+      <div ng-messages="addProject.commitment.$error">
+        <div ng-message="required">Numerical number is required!</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+  <!-- LOCATION -->
+    <md-input-container>
+      <label>Location</label>
+      <input class="inp-field" type="text" name="location" ng-model="location" required>
+      <div ng-messages="addProject.location.$error">
+        <div ng-message="required">Error</div>
+      </div>
+    </md-input-container>
+    <br/>
+
+    <div>
+      <input type="file" accept="image/*"  onchange="angular.element(this).scope().inputFileNameChanged(this)">
     </div>
-  </md-input-container>
-  <br/>
 
-
-  <!-- DESCRIPTION -->
-  <md-input-container>
-    <label>Project Description</label>
-    <textarea name="description" ng-model="description" required md-maxlength="300"></textarea>
-    <div ng-messages="addProject.description.$error">
-      <div ng-message="required">This is required!</div>
-    </div>
-  </md-input-container>
-  <br/>
-
-
-<!-- EMAIL -->
-  <md-input-container>
-    <label>Email</label>
-    <input class="inp-field" name="email" ng-model="email" required="testing">
-    <div ng-messages="addProject.email.$error">
-      <div ng-message="required">This is required!</div>
-    </div>
-  </md-input-container>
-  <br/>
-
-
-<!-- SKILLS -->
-  <md-input-container>
-    <label>Skills Wanted (separate by comma)</label>
-    <input class="inp-field" name="skills" ng-model="skills" required="testing">
-    <div ng-messages="addProject.skills.$error">
-      <div ng-message="required">This is required!</div>
-    </div>
-  </md-input-container>
-  <br/>
-
-
-<!-- NUM VOLUNTEERS -->
-  <md-input-container>
-    <label>Number of Volunteers</label>
-    <input class="inp-field" type = "number" name="numVolunteers" ng-model="numVolunteers"
-    required="testing">
-    <div ng-messages="addProject.numVolunteers.$error">
-      <div ng-message="required">Numerical number is required!</div>
-    </div>
-  </md-input-container>
-  <br/>
-
-
-<!-- DATE -->
-  <md-input-container>
-    <label>Project Start Date</label>
-    <input class="inp-field" type="date" name="startDate" ng-model="startDate"
-    required="testing">
-    <div ng-messages="addProject.startDate.$error">
-      <div ng-message="required">Numerical number is required!</div>
-    </div>
-  </md-input-container>
-  <br/>
-
-  <!-- DATE -->
-  <md-input-container>
-    <label>Project End Date</label>
-    <input class="inp-field" type="date" name="endDate" ng-model="endDate"
-    required="testing">
-    <div ng-messages="addProject.endDate.$error">
-      <div ng-message="required">Numerical number is required!</div>
-    </div>
-  </md-input-container>
-  <br/>
-
-<!-- COMMITMENT -->
-  <md-input-container>
-    <label>Desired Commitment (hours)</label>
-    <input class="inp-field" type="number" name="commitment" ng-model="commitment"
-    required="testing">
-    <div ng-messages="addProject.commitment.$error">
-      <div ng-message="required">Numerical number is required!</div>
-    </div>
-  </md-input-container>
-  <br/>
-
-<!-- LOCATION -->
-  <md-input-container>
-    <label>Location</label>
-    <input class="inp-field" type="text" name="location" ng-model="location">
-    <div ng-messages="addProject.location.$error">
-      <div ng-message="required">Error</div>
-    </div>
-  </md-input-container>
-  <br/>
-
-  <div>
-    <input type="file" accept="image/*"  onchange="angular.element(this).scope().inputFileNameChanged(this)">
-  </div>
-
-  <input type="submit" value="Submit" class="ap-submit">
+    <input type="submit" value="Submit" class="ap-submit">
+    
   </form>
+  
 </div>
