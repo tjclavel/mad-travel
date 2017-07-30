@@ -14,8 +14,10 @@ cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resourc
           var file = new Blob([response.data], {type: 'image/jpeg'});
           var fileURL = URL.createObjectURL(file);
           project.image_url = $sce.trustAsResourceUrl(fileURL);
-          var date = new Date(project.date);
-          project.date = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+          var startDate = new Date(project.startDate);
+          project.startDate = startDate.getMonth() + "/" + startDate.getDate() + "/" + startDate.getFullYear();
+          var endDate = new Date(project.endDate);
+          project.endDate = endDate.getMonth() + "/" + endDate.getDate() + "/" + endDate.getFullYear();
           $scope.project = project;
       })
     });

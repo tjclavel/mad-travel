@@ -61,41 +61,29 @@
 <!-- DATE -->
   <md-input-container>
     <label>Project Start Date</label>
-    <input class="inp-field" type="date" name="date" ng-model="date"
+    <input class="inp-field" type="date" name="startDate" ng-model="startDate"
     required="testing">
-    <div ng-messages="addProject.date.$error">
+    <div ng-messages="addProject.startDate.$error">
       <div ng-message="required">Numerical number is required!</div>
     </div>
   </md-input-container>
   <br/>
 
-
-<!-- START TIME 
+  <!-- DATE -->
   <md-input-container>
-    <label>Starting Time</label>
-    <input class="inp-field" type = "time" name="startTime" ng-model="startTime" required="testing">
-    <div ng-messages="addProject.startTime.$error">
+    <label>Project End Date</label>
+    <input class="inp-field" type="date" name="endDate" ng-model="endDate"
+    required="testing">
+    <div ng-messages="addProject.endDate.$error">
       <div ng-message="required">Numerical number is required!</div>
     </div>
   </md-input-container>
   <br/>
-
-
-   END TIME 
-  <md-input-container>
-    <label>End Time</label>
-    <input class="inp-field" type="time" name="endTime" ng-model="endTime" required="testing">
-    <div ng-messages="addProject.endTime.$error">
-      <div ng-message="required">Numerical number is required!</div>
-    </div>
-  </md-input-container>
-  <br/>-->
-
 
 <!-- COMMITMENT -->
   <md-input-container>
     <label>Desired Commitment (hours)</label>
-    <input class="inp-field" type = "number" name="commitment" ng-model="commitment"
+    <input class="inp-field" type="number" name="commitment" ng-model="commitment"
     required="testing">
     <div ng-messages="addProject.commitment.$error">
       <div ng-message="required">Numerical number is required!</div>

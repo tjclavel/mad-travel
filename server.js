@@ -111,7 +111,7 @@ app.get('/load/projects/:sort_criteria', function(req, res) {
       res.status(200).send(JSON.stringify(projects));
     });
   }else if(sort_criteria === "earliest_start_date_first"){
-    Project.find({}).sort({date: 1}).exec(function(err, projects) {
+    Project.find({}).sort({startDate: 1}).exec(function(err, projects) {
       res.status(200).send(JSON.stringify(projects));
     });
   }
@@ -134,7 +134,7 @@ app.get('/download_image/:image_id', function(req, res) {
 }); //change the front-end code
 
 app.post('/add/project', function(request, response){
-    
+    console.log('adding project')
     processFormBody(request, response, function (err) {
         if (err) {
             response.status(500).send(JSON.stringify(err));
@@ -182,7 +182,8 @@ app.post('/add/project', function(request, response){
             numVolunteers: request.body.numVolunteers,
             numVolunteersSignedUp: 0,
             volunteers: [],
-            date: request.body.date,
+            startDate: request.body.startDate,
+            endDate: request.body.endDate,
             _location: request.body._location,
             commitment: request.body.commitment,
           }, function(err, project){
@@ -247,7 +248,7 @@ app.post('/volunteer_signed_up/:projectId', function(request, response){
 //'mongodb://localhost/cs142project6'
 //process.env.MONGODB_URI
 //Use above when working on localhost.
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/cs142project6', function(err){
+mongoose.connect('mongodb://localhost/cs142project6', function(err){
   if (err) {
     console.log(err);
     process.exit(1);

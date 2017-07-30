@@ -11,9 +11,8 @@ var projectSchema = new mongoose.Schema({
   numVolunteers: Number,
   numVolunteersSignedUp: Number,
   volunteers: [],
-  /*startTime: String,
-  endTime: String,*/
-  date: String,
+  startDate: String,
+  endDate: String,
   _location: String,
   commitment: Number
 });

@@ -53,7 +53,7 @@
 
         </div>
 
-        <div class="main-login" ng-show="projectsViewCurrentlyDisplayed()">
+        <div class="main-login" ng-if="projectsViewCurrentlyDisplayed()">
           <md-button ng-click="login()" ng-show="!main.asAdministrator">
             Login as Administrator
           </md-button>
