@@ -240,15 +240,10 @@ app.post('/volunteer_signed_up/:projectId', function(request, response){
 
 });
 
-// var server = app.listen(3000, function () {
-//     var port = server.address().port;
-//     console.log('Listening at http://localhost:' + port + ' exporting the directory ' + __dirname);
-// });
-
 //'mongodb://localhost/cs142project6'
 //process.env.MONGODB_URI
 //Use above when working on localhost.
-mongoose.connect('mongodb://localhost/cs142project6', function(err){
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/cs142project6', function(err){
   if (err) {
     console.log(err);
     process.exit(1);
@@ -265,25 +260,6 @@ mongoose.connect('mongodb://localhost/cs142project6', function(err){
   });
 });
 
-
-
-// function putFile(path, name, callback) {
-//     var writestream = GridFS.createWriteStream({
-//         filename: name
-//     });
-//     writestream.on('close', function (file) {
-//       callback(null, file);
-//     });
-//     fs.createReadStream(path).pipe(writestream);
-// }
-
-// try {
-//     var readstream = GridFS.createReadStream({filename: filename});
-//     readstream.pipe(res);
-// } catch (err) {
-//     log.error(err);
-//     return next(errors.create(404, "File not found."));
-// }
 
 
 
