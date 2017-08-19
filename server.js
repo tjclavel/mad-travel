@@ -37,6 +37,8 @@ var gfs;
 var async = require('async');
 var session = require('express-session');
 var stream = require('stream');
+var Dropbox = require('dropbox');
+var dbx;
 
 // Load the Mongoose schema for User, Photo, and SchemaInfo
 var User = require('./schema/user.js');
@@ -125,16 +127,25 @@ app.get('/project/:projectId', function(req, res) {
   });
 });
 
-app.get('/download_image/:image_id', function(req, res) {
-  console.log("Hello");
-   var readstream = gfs.createReadStream({
-      _id: req.params.image_id
-   });//it is not finding a file with this ID
-   readstream.pipe(res);
-}); //change the front-end code
+// app.get('/download_image/:filename', function(req, res) {
+//    var readstream = gfs.createReadStream({
+//       _id: req.params.image_id
+//    });//it is not finding a file with this ID
+//    readstream.pipe(res);
+// }); //change the front-end code
+
+app.post('/thumbnail', function(req, res){
+  console.log('filename: ', req.body.filename)
+  dbx.filesGetThumbnail({path: '/' + req.body.filename})
+  .then(function(data){
+    res.status(200).send(data.fileBinary);
+  })
+  .catch(function(err){
+    console.log(err);
+  })
+})
 
 app.post('/add/project', function(request, response){
-    console.log('adding project')
     processFormBody(request, response, function (err) {
         if (err) {
             response.status(500).send(JSON.stringify(err));
@@ -161,23 +172,13 @@ app.post('/add/project', function(request, response){
         var timestamp = new Date().valueOf();
         var filename = 'U' +  String(timestamp) + request.file.originalname;
 
-        var bufferStream = new stream.PassThrough();
-        bufferStream.end(request.file.buffer);
-
-        var writestream = gfs.createWriteStream({
-          filename: filename,
-          mode: 'w',
-          content_type: request.file.mimetype,
-        });
-
-        bufferStream.pipe(writestream);
-
-        writestream.on('close', function(file) {
+        dbx.filesUpload({path: '/' + filename, contents: request.file.buffer})
+        .then(function(data){
           Project.create({
             title: request.body.title,
             skills: request.body.skills,
             email: request.body.email,
-            image_id: file._id,
+            filename: filename, 
             description: request.body.description,
             numVolunteers: request.body.numVolunteers,
             numVolunteersSignedUp: 0,
@@ -189,17 +190,18 @@ app.post('/add/project', function(request, response){
           }, function(err, project){
               console.log("project added successfully");
               response.status(200).send(JSON.stringify(project));
+              return
           });
-
+        })
+        .catch(function(error) {
+          console.error(error);
         });
     });
 });
 
 app.post('/delete/project/:projectId', function(request, response){
-  console.log(request.params.projectId);
-  Project.findOne({_id: request.params.projectId}).remove(function(err, project) {
-    console.log("hello");
-
+  
+  Project.findById(request.params.projectId, function (err, project) {
     if(err){
       response.status(500).send(JSON.stringify(err));
       return;
@@ -208,8 +210,19 @@ app.post('/delete/project/:projectId', function(request, response){
       response.status(400).send("No existing project");
       return;
     }
-    return response.status(200).send();
-  });
+
+    project.remove(function(err){
+      if(err) return response.status(500).send(JSON.stringify(err))
+      dbx.filesDeleteV2({path: '/' + project.filename})
+      .then(function(){
+        return response.status(200).send();
+      })
+      .catch(function(err){
+        return response.status(500).send(JSON.stringify(err))
+      })
+    }); //Removes the project
+
+  })
 
 });
 
@@ -252,6 +265,15 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/cs142project6',
   console.log("Database connection ready");
 
   gfs = Grid(mongoose.connection.db, mongoose.mongo);
+  console.log('access_token: ', process.env.DROPBOX_ACCESS_TOKEN)
+  dbx = new Dropbox({ accessToken: process.env.DROPBOX_ACCESS_TOKEN });
+  dbx.filesListFolder({path: ''})
+  .then(function(response) {
+    console.log(response);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
 
   // Initialize the app.
   var server = app.listen(process.env.PORT || 3000, function () {

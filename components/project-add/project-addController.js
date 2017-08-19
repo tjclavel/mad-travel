@@ -1,7 +1,8 @@
 cs142App.controller('ProjectAddController', ['$scope', '$resource','$routeParams', '$http', '$location',
   function($scope, $resource, $routeParams, $http, $location) {
     $scope.main.currentView = "addProjectView"
-    $scope.message = "";
+    $scope.currentlyAddingProject = false
+    $scope.errorMessage = ""
 
     var selectedPhotoFile;   // Holds the last file selected by the user
 
@@ -37,19 +38,19 @@ cs142App.controller('ProjectAddController', ['$scope', '$resource','$routeParams
         domForm.append('numVolunteers', $scope.numVolunteers);
         domForm.append('startDate', $scope.startDate);
         domForm.append('endDate', $scope.endDate);
-        /*domForm.append('startTime', $scope.startTime);
-        domForm.append('endTime', $scope.endTime);*/
         domForm.append('commitment', $scope.commitment);
         domForm.append('_location', $scope.location);
 
+        $scope.currentlyAddingProject = true
         // Using $http to POST the form
         $http.post('/add/project', domForm, { transformRequest: angular.identity, headers: {'Content-Type': undefined}})
         .then(function successCallback(){//(response){
-            console.log("Callback was successful ");
+            $scope.currentlyAddingProject = false
+            $scope.errorMessage = ""
             $location.path("/posts");
         }, function errorCallback(err){
-            // Couldn't upload the photo. XXX  - Do whatever you want on failure.
-            $scope.message = err.data;
+            $scope.errorMessage = "Error: " + err.data;
+            $scope.currentlyAddingProject = false
         });
     };
 

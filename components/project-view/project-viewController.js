@@ -8,7 +8,7 @@ cs142App.controller('ProjectViewController', ['$scope', '$routeParams','$resourc
     Project.get(function(project) {
       $http({
         method: 'GET',
-        url: '/download_image/' + project.image_id,
+        url: '/download_thumbnail/' + project.filename,
         responseType: 'arraybuffer'
       }).then(function(response) {
           var file = new Blob([response.data], {type: 'image/jpeg'});

@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var projectSchema = new mongoose.Schema({
   title: String,
   skills: String,
-  image_id: String,
+  filename: String,
   description: String,
   email: String,
   numVolunteers: Number,

@@ -6,27 +6,38 @@
   <md-button ng-click="addProject()">Add Project</md-button>
 </div>
 
-<div class="pp-sorter">
-  <div class="pp-mySelectWrapper">
-    <select class="pp-mySelect" ng-model="main.sort_criteria" ng-change="reorder_projects()">
-      <option value="earliest_start_date_first">Earliest Start Date First</option>
-      <option value="lowest_commitment_first">Lowest Commitment First</option>
-    </select>
-  </div>
-  <span class="pp-sorter-label">
-    SORT BY:
-  </span>
-</div>
+<div ng-show="!projectsCurrentlyLoading">
 
-<div class="pp-projects">
-  
-  <div class="pp-project" ng-repeat="project in main.projects">
-    <img ng-show="main.asAdministrator === true" class="pp-delete" ng-src = "images/delete_button.ico" ng-click="delete_project(project._id)">
-    <img class="pp-project-image" ng-src="{{project.image_url}}" ng-click="goto_project(project._id)">
-    <div class="pp-orange"></div>
-    <div class="pp-project-title"><h4>{{project.title}}</h4></div>
-    <div class="pp-project-title"><p>{{project._location}}</p></div>
+  <div class="pp-sorter">
+    <div class="pp-mySelectWrapper">
+      <select class="pp-mySelect" ng-model="main.sort_criteria" ng-change="reorder_projects()">
+        <option value="earliest_start_date_first">Earliest Start Date First</option>
+        <option value="lowest_commitment_first">Lowest Commitment First</option>
+      </select>
+    </div>
+    <span class="pp-sorter-label">
+      SORT BY:
+    </span>
   </div>
 
-  <!--ng-src="images/{{project.image}}"-->
+  <div class="pp-projects">
+    
+    <div class="pp-project" ng-repeat="project in main.projects">
+      <img ng-show="main.asAdministrator === true" class="pp-delete" ng-src = "images/delete_button.ico" ng-click="delete_project(project._id)">
+      <img class="pp-project-image" ng-src="{{project.image_url}}" ng-click="goto_project(project._id)">
+      <div class="pp-orange"></div>
+      <div class="pp-project-title"><h4>{{project.title}}</h4></div>
+      <div class="pp-project-title"><p>{{project._location}}</p></div>
+    </div>
+
+  </div>
+
 </div>
+
+<div ng-show="projectsCurrentlyLoading">
+
+  <h1 class="projects-loading">Projects loading</h1>
+
+</div>
+
+

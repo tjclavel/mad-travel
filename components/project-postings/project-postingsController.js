@@ -2,6 +2,8 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$locat
   function($scope, $resource, $location, $mdDialog, $route, $sce, $http, $q) {
 
     $scope.main.currentView = "projectsView";
+    $scope.errorMessage = ""
+    $scope.projectsCurrentlyLoading = true;
 
     $scope.addProject = function() {
       $location.path("/add/project");
@@ -10,21 +12,38 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$locat
     var resource = $resource('/load/projects/' + $scope.main.sort_criteria);
     resource.query(function(projects){
       promises = [];
+      blobs = [];
       projects.forEach(function(project){
         promises.push(
-          $http({
-            method: 'GET',
-            url: '/download_image/' + project.image_id,
-            responseType: 'arraybuffer'
-          }).then(function(response) {
-            var file = new Blob([response.data], {type: 'image/jpeg'});
-            var fileURL = URL.createObjectURL(file);
-            project.image_url = $sce.trustAsResourceUrl(fileURL);
+          $http.post('/thumbnail', {filename: project.filename}, {responseType: 'blob'})
+          .then(function(response) {
+            // var thumbnailBlob = new Blob([response.data], {type: 'image/jpeg'});
+            // console.log(thumbnailBlob)
+            // var fileURL = URL.createObjectURL(thumbnailBlob);
+            // console.log(fileURL)
+            // project.image_url = $sce.trustAsResourceUrl(fileURL);
+            // var arrayBufferView = new Uint8Array(response.data);
+            // var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
+            // var urlCreator = window.URL || window.webkitURL;
+            // var imageUrl = urlCreator.createObjectURL( blob );
+            // project.image_url = imageUrl
+            //blobs.push(new Blob([response.data], {type: 'image/jpeg'}))
           })
         )
       })
       $q.all(promises).then(function(){
         $scope.main.projects = projects;
+        // console.log('blobs.length', blobs.length)
+        // for (var i = 0; i < blobs.length; i++) {
+        //   var j = i
+        //   var reader = new window.FileReader();
+        //   reader.readAsDataURL(blobs[i]);
+        //   reader.onloadend = function() {
+        //     console.log('result', reader.result)
+        //     $scope.main.projects[j].image_url = reader.result;
+        //   };
+        // }
+        $scope.projectsCurrentlyLoading = false;
       });
     });
 
@@ -41,10 +60,20 @@ cs142App.controller('ProjectPostingsController', ['$scope', '$resource', '$locat
         };
 
         $scope.deleteProject = function(projectId){
-          console.log(projectId);
+          $mdDialog.show({
+            template:
+              '<md-dialog aria-label="Dialog">' +
+              '  <md-dialog-content>' +
+              '    Deleting project' + 
+              '  </md-dialog-content>' +
+              '</md-dialog>'
+          });
+          
           var DeleteProject = $resource("/delete/project/" + projectId);
-          DeleteProject.save(function(){
-            console.log("Project deleted");
+          DeleteProject.save(function(err){
+            if(err){
+              $scope.errorMessage = "Error: " + err.data
+            }
             $route.reload();
             $mdDialog.hide();
           });
